@@ -19,7 +19,7 @@ class CreateGestionnairesTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('image_profil')->nullable();
-            $table->text('role')->default("clients,client,conducteurs,conducteur,vehicules,vehicule,vehicule_add,vehicule_edit,partenaire,operation,prix,bonus,news,faq,managers,manager,manager_add,entreprises,entreprise,faqs,faq_edit,faq_add,faq_delete,");
+            $table->text('role')->default("clients,client,conducteurs,conducteur,vehicules,vehicule,vehicule_add,vehicule_edit,partenaire,operation,prix,bonus,news,faq,managers,manager,manager_add,entreprises,entreprise,faqs,faq_edit,faq_add,faq_delete,finance,");
             $table->string("password");
             $table->boolean("is_gourou")->default(false);
             $table->timestamps();

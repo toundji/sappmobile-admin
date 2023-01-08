@@ -26,26 +26,39 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('', [MainController::class, "index"])->name("index");
 
-Route::prefix('finance')->middleware(["middleware" => "authadmin"])->group(function () {
+Route::prefix('finance')->group(function () {
 
-    Route::get('generals/{type}', [FinanceController::class, "generals"])->middleware("autorisationAuth:finance_generals")->name("admin.finance_generals");
+    Route::get('', [FinanceController::class, "login"])->name("login-finance");
 
-    Route::get('clients/{type}', [FinanceController::class, "clients"])->middleware("autorisationAuth:finance_clients")->name("admin.finance_clients");
+    Route::middleware(["middleware" => "authfinance"])->group(function () {
 
-    Route::get('conducteurs/{type}', [FinanceController::class, "conducteurs"])->middleware("autorisationAuth:finance_conducteurs")->name("admin.finance_conducteurs");
-
-    Route::get('vehicules/{type}', [FinanceController::class, "vehicules"])->middleware("autorisationAuth:finance_vehicules")->name("admin.finance_vehicules");
-
-    Route::get('entreprises/{type}', [FinanceController::class, "entreprises"])->middleware("autorisationAuth:finance_entreprises")->name("admin.finance_entreprises");
+        Route::get('generals/{type}', [FinanceController::class, "generals"])->name("finance.generals");
 
 
-    Route::get('client/{id}', [FinanceController::class, "client"])->middleware("autorisationAuth:finance_client")->name("admin.finance_client");
+        Route::get('conducteurs/{type}', [FinanceController::class, "conducteurs"])->name("finance.conducteurs");
 
-    Route::get('conducteur/{id}', [FinanceController::class, "conducteur"])->middleware("autorisationAuth:finance_conducteur")->name("admin.finance_conducteur");
+        Route::get('conducteur/{id}/{type}', [FinanceController::class, "conducteur"])->name("finance.conducteur");
 
-    Route::get('vehicule/{id}', [FinanceController::class, "vehicule"])->middleware("autorisationAuth:finance_vehicule")->name("admin.finance_vehicule");
 
-    Route::get('entreprise/{id}', [FinanceController::class, "entreprise"])->middleware("autorisationAuth:finance_entreprise")->name("admin.finance_entreprise");
+        Route::get('clients/{type}', [FinanceController::class, "clients"])->name("finance.clients");
+
+        Route::get('client/{id}/{type}', [FinanceController::class, "client"])->name("finance.client");
+
+
+        Route::get('vehicules/{type}', [FinanceController::class, "vehicules"])->name("finance.vehicules");
+
+        Route::get('vehicule/{id}/{type}', [FinanceController::class, "vehicule"])->name("finance.vehicule");
+
+
+
+        Route::get('entreprises/{type}', [FinanceController::class, "entreprises"])->name("finance.entreprises");
+
+        Route::get('entreprise/{id}/{type}', [FinanceController::class, "entreprise"])->name("finance.entreprise");
+
+
+        Route::get('disconnect', [FinanceController::class, "disconnect"])->name("finance.disconnect");
+
+    });
 
 });
 
@@ -71,11 +84,9 @@ Route::prefix('admin')->group(function () {
         Route::get('client/{id}', [ClientController::class, "client"])->middleware("autorisationAuth:clients")->name("admin.client");
 
 
-
         Route::get('conducteurs/{type?}', [ConducteurController::class, "conducteurs"])->middleware("autorisationAuth:conducteurs")->name("admin.conducteurs");
 
         Route::get('conducteur/{id}', [ConducteurController::class, "conducteur"])->middleware("autorisationAuth:conducteurs")->name("admin.conducteur");
-
 
 
         Route::get('vehicules', [VehiculeController::class, "vehicules"])->middleware("autorisationAuth:vehicules")->name("admin.vehicules");
@@ -85,7 +96,6 @@ Route::prefix('admin')->group(function () {
         Route::get('edit-vehicule/{id}', [VehiculeController::class, "edit_vehicule"])->middleware("autorisationAuth:vehicule_edit")->name("admin.edit-vehicule");
 
         Route::get('vehicule/{id}', [VehiculeController::class, "vehicule"])->middleware("autorisationAuth:vehicules")->name("admin.vehicule");
-
 
 
         Route::get('classes', [VehiculeController::class, "price"])->middleware("autorisationAuth:classes")->name("admin.classes");
@@ -102,17 +112,14 @@ Route::prefix('admin')->group(function () {
         Route::get('manager/{id}', [ManagerController::class, "manager"])->middleware("autorisationAuth:managers")->name("admin.manager");
 
 
-
         Route::get('entreprises', [EntrepriseController::class, "entreprises"])->middleware("autorisationAuth:entreprises")->name("admin.entreprises");
 
         Route::get('entreprise/{id}', [EntrepriseController::class, "entreprise"])->middleware("autorisationAuth:entreprises")->name("admin.entreprise");
 
 
-
         Route::get('bonuses', [BonusController::class, "bonuses"])->middleware("autorisationAuth:bonuses")->name("admin.bonuses");
 
         Route::get('define-bonus', [BonusController::class, "define_bonus"])->middleware("autorisationAuth:bonus_define")->name("admin.define-bonus");
-
 
 
         Route::get('operations/{type?}', [OperationController::class, "operations"])->middleware("autorisationAuth:operations")->name("admin.operations");
@@ -128,7 +135,6 @@ Route::prefix('admin')->group(function () {
         Route::get('faq/{id}', [OtherController::class, "faq"])->middleware("autorisationAuth:faq_edit")->name("admin.faq");
 
 
-
         Route::get('add-annonce', [OtherController::class, "add_annonce"])->middleware("autorisationAuth:annonce_add")->name("admin.add-annonce");
 
         Route::get('annonces', [OtherController::class, "annonces"])->middleware("autorisationAuth:annonces")->name("admin.annonces");
@@ -136,13 +142,11 @@ Route::prefix('admin')->group(function () {
         Route::get('annonce/{id}', [OtherController::class, "annonce"])->middleware("autorisationAuth:annonce_edit")->name("admin.annonce");
 
 
-
         Route::get('add-publication', [OtherController::class, "add_publication"])->middleware("autorisationAuth:publication_add")->name("admin.add-publication");
 
         Route::get('publications', [OtherController::class, "publications"])->middleware("autorisationAuth:publications")->name("admin.publications");
 
         Route::get('publication/{id}', [OtherController::class, "publication"])->middleware("autorisationAuth:publication_edit")->name("admin.publication");
-
 
 
         Route::get('informations', [AdminController::class, "informations"])->name("admin.informations");

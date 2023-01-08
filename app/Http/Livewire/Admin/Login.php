@@ -10,6 +10,11 @@ class Login extends Component
 {
     public $email;
     public $password;
+    public $type;
+
+    public function mount($type) {
+        $this->type = $type;
+    }
 
     protected $rules = [
         'password' => 'required|min:4',
@@ -32,17 +37,35 @@ class Login extends Component
     public function login() {
         $this->validate();
 
-        $admin = Gestionnaire::where('email', $this->email)->first();
-        if($admin !== null) {
-            if(Hash::check($this->password, $admin->password)) {
-                f_setCookie(md5('token_sapp'), $admin->id);
-                return redirect()->route('admin.clients');
+        if ($this->type === "finance") {
+            $admin = Gestionnaire::where('email', $this->email)->first();
+            if($admin !== null) {
+                if(Hash::check($this->password, $admin->password) && autorisationAuth("finance", $admin->id)) {
+                    f_setCookie(md5('token_sapp'), $admin->id);
+                    f_setCookie(md5('token_sapp_finance'), $admin->id);
+
+                    return redirect()->route('finance.generals', ["type" => "day"]);
+                } else {
+                    session()->flash('message', "Email ou Mot de passe incorrect");
+                }
             } else {
-                session()->flash('message', "Mot de passe incorrect");
+                session()->flash('message', "Email ou Mot de passe incorrect");
             }
         } else {
-            session()->flash('message', "Email incorrect");
+            $admin = Gestionnaire::where('email', $this->email)->first();
+            if($admin !== null) {
+                if(Hash::check($this->password, $admin->password)) {
+                    f_setCookie(md5('token_sapp'), $admin->id);
+
+                    return redirect()->route('admin.clients');
+                } else {
+                    session()->flash('message', "Email ou Mot de passeincorrect");
+                }
+            } else {
+                session()->flash('message', "Email ou Mot de passeincorrect");
+            }
         }
+
     }
 
 

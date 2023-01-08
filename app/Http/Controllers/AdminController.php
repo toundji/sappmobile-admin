@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Constante;
-use App\Models\Information;
 use App\Models\Localisation;
 use App\Models\Transport;
 use Illuminate\Http\Request;
@@ -74,6 +73,7 @@ class AdminController extends Controller
 
     public function disconnect() {
         f_deleteCookie(md5('token_sapp'));
+        f_deleteCookie(md5('token_sapp_finance'));
         return redirect()->route('login-admin');
     }
 }

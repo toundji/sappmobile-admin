@@ -52,7 +52,7 @@
             <img src="{{ asset('images/logo.jpg') }}" class="w-50" alt="">
             <div class="col-xl-4 col-lg-5 col-md-6 col-sm-10 mx-auto my-auto p-4 rounded shadow-sm text-black bg-white">
                 <h5 class="text-primary- text-center mb-4">CONNEXION BACK-OFFICE SAPP MOBILE</h5>
-                @livewire('admin.login')
+                @livewire('admin.login', ["type" => $type??""])
             </div>
         </div>
 

@@ -31,8 +31,8 @@
                             </td>
                             <td>{{ $entreprise->ville }}</td>
                             <td>
-                                @if ($entreprise->user)
-                                    <a href="{{ route('admin.client', ['id' => $entreprise->user->id]) }}">{{ ucfirst($entreprise->user->last_name).' '.ucfirst($entreprise->user->first_name) }}</a>
+                                @if ($entreprise->agent_entreprise)
+                                    <a href="{{ route('admin.client', ['id' => $entreprise->agent_entreprise->user->id]) }}">{{ ucfirst($entreprise->agent_entreprise->user->last_name).' '.ucfirst($entreprise->agent_entreprise->user->first_name) }}</a>
                                 @endif
                             </td>
                             <td class="text-center"><a href="{{ route('admin.entreprise', ['id' => $entreprise->id]) }}"><i class="uil uil-eye icon-view"></i></a></td>

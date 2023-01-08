@@ -108,11 +108,11 @@
                                 @php
                                     $i = 1;
                                 @endphp
-                                @foreach ($entreprise->$vehicules as $vehicule)
+                                @foreach ($entreprise->vehicules as $vehicule)
                                     <tr class="border-white">
                                         <td scope="row"><b class="text-primary-">{{ $i }}</b></td>
                                         <td>{{ $vehicule->matricule }}</td>
-                                        <td>{{ $category->name }}</td>
+                                        <td>{{ $vehicule->category->name }}</td>
                                         <td>{{ $vehicule->model }}</td>
                                         <td>{{ $entreprise->name }}</td>
                                         <td>

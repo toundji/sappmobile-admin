@@ -55,16 +55,16 @@
                 <h5 class="text-primary- text-center mb-4">CONNEXION BACK-OFFICE SAPP MOBILE</h5>
                 <?php
 if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('admin.login')->html();
-} elseif ($_instance->childHasBeenRendered('13ACDex')) {
-    $componentId = $_instance->getRenderedChildComponentId('13ACDex');
-    $componentTag = $_instance->getRenderedChildComponentTagName('13ACDex');
+    $html = \Livewire\Livewire::mount('admin.login', ["type" => $type??""])->html();
+} elseif ($_instance->childHasBeenRendered('JBAgQql')) {
+    $componentId = $_instance->getRenderedChildComponentId('JBAgQql');
+    $componentTag = $_instance->getRenderedChildComponentTagName('JBAgQql');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('13ACDex');
+    $_instance->preserveRenderedChild('JBAgQql');
 } else {
-    $response = \Livewire\Livewire::mount('admin.login');
+    $response = \Livewire\Livewire::mount('admin.login', ["type" => $type??""]);
     $html = $response->html();
-    $_instance->logRenderedChild('13ACDex', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('JBAgQql', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

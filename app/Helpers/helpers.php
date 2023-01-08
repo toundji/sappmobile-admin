@@ -3,13 +3,11 @@
 use App\Models\AgentEntreprise;
 use App\Models\Bonus;
 use App\Models\Category;
-use App\Models\Client;
 use App\Models\Conducteur;
 use App\Models\Entreprise;
 use App\Models\Gestionnaire;
 use App\Models\PorteFeuille;
 use App\Models\User;
-use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Route as FacadesRoute;
 
 if(!function_exists('f_page_title')) {
@@ -64,10 +62,6 @@ function getUser($id) {
     return User::where('id', $id)->first();
 }
 
-function getClientByUser($id) {
-    return Client::where('user_id', $id)->first();
-}
-
 function getConducteurByUser($id) {
     return Conducteur::where('user_id', $id)->first();
 }
@@ -104,10 +98,6 @@ function getAgentEntreprise($id) {
 
 function getConducteur($id) {
     return Conducteur::where('id', $id)->first();
-}
-
-function getClient($id) {
-    return Client::where('id', $id)->first();
 }
 
 function getGestionnaire($id) {

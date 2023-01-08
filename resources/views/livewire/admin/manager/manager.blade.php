@@ -78,6 +78,13 @@
                     <td><input type="checkbox" wire:click="setRole('faq_edit')" {{ autorisationAuth("faq_edit", $manager->id) ? "checked" : "" }} name="" id=""></td>
                     <td><input type="checkbox" wire:click="setRole('faq_delete')" {{ autorisationAuth("faq_delete", $manager->id) ? "checked" : "" }} name="" id=""></td>
                 </tr>
+                <tr class="py-2">
+                    <td>Finance</td>
+                    <td><input type="checkbox" wire:click="setRole('finance')" {{ autorisationAuth("finance", $manager->id) ? "checked" : "" }} name="" id=""></td>
+                    <td><input type="checkbox"  disabled name="" id=""></td>
+                    <td><input type="checkbox" disabled name="" id=""></td>
+                    <td><input type="checkbox" disabled name="" id=""></td>
+                </tr>
             </tbody>
         </table>
     </div>

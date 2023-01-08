@@ -159,7 +159,6 @@
                                     <h4 class="pt-2 text-center text-white fw-bold">SAPP MOBILE</h4>
                                 </div>
                                 <div class="hstack ms-auto">
-                                    <i class="uil uil-usd-circle fs-3 text-white me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"></i>
                                     <a href="{{ route('admin.setting') }}"><i class="uil uil-setting fs-3 text-white me-3"></i></a>
                                     <a href="{{ route('admin.disconnect') }}"><i class="uil uil-sign-out-alt fs-3 text-white"></i></a>
                                 </div>
@@ -180,57 +179,6 @@
             </div>
         </section>
 
-
-
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasExampleLabel">SAPP MOBILE FINANCE</h5>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-
-                <div>
-                    <h6 class="nav_list_title">Gains générales <i class="uil uil-arrow-down float-end"></i></h6>
-                    <ul class="nav_list">
-                        <li class="nav_item "><a href="{{ route('admin.conducteurs') }}" class="nav_link {{ active('admin.conducteurs') }}  {{ active('admin.conducteur') }}">Jour</a></li>
-                        <li class="nav_item "><a href="{{ route('admin.conducteurs') }}" class="nav_link {{ active('admin.conducteurs') }}  {{ active('admin.conducteur') }}">Mois</a></li>
-                        <li class="nav_item "><a href="{{ route('admin.conducteurs') }}" class="nav_link {{ active('admin.conducteurs') }}  {{ active('admin.conducteur') }}">Année</a></li>
-                        <li class="nav_item "><a href="{{ route('admin.conducteurs') }}" class="nav_link {{ active('admin.conducteurs') }}  {{ active('admin.conducteur') }}">Période</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h6 class="nav_list_title">Gains par conducteur  <i class="uil uil-arrow-down float-end"></i></h6>
-                    <ul class="nav_list">
-                        <li class="nav_item "><a href="{{ route('admin.conducteurs') }}" class="nav_link {{ active('admin.conducteurs') }}  {{ active('admin.conducteur') }}">Jour</a></li>
-                        <li class="nav_item "><a href="{{ route('admin.conducteurs') }}" class="nav_link {{ active('admin.conducteurs') }}  {{ active('admin.conducteur') }}">Mois</a></li>
-                        <li class="nav_item "><a href="{{ route('admin.conducteurs') }}" class="nav_link {{ active('admin.conducteurs') }}  {{ active('admin.conducteur') }}">Année</a></li>
-                        <li class="nav_item "><a href="{{ route('admin.conducteurs') }}" class="nav_link {{ active('admin.conducteurs') }}  {{ active('admin.conducteur') }}">Période</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h6 class="nav_list_title">Gains par véhicule  <i class="uil uil-arrow-down float-end"></i></h6>
-                    <ul class="nav_list">
-                        <li class="nav_item "><a href="{{ route('admin.conducteurs') }}" class="nav_link {{ active('admin.conducteurs') }}  {{ active('admin.conducteur') }}">Jour</a></li>
-                        <li class="nav_item "><a href="{{ route('admin.conducteurs') }}" class="nav_link {{ active('admin.conducteurs') }}  {{ active('admin.conducteur') }}">Mois</a></li>
-                        <li class="nav_item "><a href="{{ route('admin.conducteurs') }}" class="nav_link {{ active('admin.conducteurs') }}  {{ active('admin.conducteur') }}">Année</a></li>
-                        <li class="nav_item "><a href="{{ route('admin.conducteurs') }}" class="nav_link {{ active('admin.conducteurs') }}  {{ active('admin.conducteur') }}">Période</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h6 class="nav_list_title">Gains par entreprise  <i class="uil uil-arrow-down float-end"></i></h6>
-                    <ul class="nav_list">
-                        <li class="nav_item "><a href="{{ route('admin.conducteurs') }}" class="nav_link {{ active('admin.conducteurs') }}  {{ active('admin.conducteur') }}">Jour</a></li>
-                        <li class="nav_item "><a href="{{ route('admin.conducteurs') }}" class="nav_link {{ active('admin.conducteurs') }}  {{ active('admin.conducteur') }}">Mois</a></li>
-                        <li class="nav_item "><a href="{{ route('admin.conducteurs') }}" class="nav_link {{ active('admin.conducteurs') }}  {{ active('admin.conducteur') }}">Année</a></li>
-                        <li class="nav_item "><a href="{{ route('admin.conducteurs') }}" class="nav_link {{ active('admin.conducteurs') }}  {{ active('admin.conducteur') }}">Période</a></li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
 
 
         @livewireScripts
