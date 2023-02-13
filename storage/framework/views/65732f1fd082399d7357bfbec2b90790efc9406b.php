@@ -17,7 +17,7 @@
             <div class="col-lg-4">
               	<div class="card mb-4">
 					<div class="card-body text-center">
-						<img src="<?php echo e(asset($user->image_profil)); ?>" alt="avatar" class="rounded-circle img-fluid" style="width: 100px; height: 100px; object-fit: cover">
+						<img src="$user->image_profil" alt="avatar" class="rounded-circle img-fluid" style="width: 100px; height: 100px; object-fit: cover">
 						<h5 class="my-3"><a href="<?php echo e(route('admin.client', ['id' => $user->id])); ?>"><?php echo e(ucfirst($user->last_name).' '.ucfirst($user->first_name)); ?></a></h5>
 						<p class="text-muted mb-4"><?php echo e($user->email); ?></p>
                         <p class="text-muted mb-4">Statut : <?php echo e($conducteur->status === 0 ? "En cours" : ($conducteur->status === 1 ? "Approuver" : "Rejeter")); ?></p>
@@ -78,7 +78,7 @@
                                 <p class="mb-0 text-black">Permis</p>
                             </div>
                             <div class="col-sm-9 text-end">
-                                <p class="text-muted mb-0"><a href="<?php echo e(asset($conducteur->permis_conduit)); ?>"  class="text-decoration-none text-primary">Télécharger <i class="uil uil-download-alt"></i></a></p>
+                                <p class="text-muted mb-0"><a href="<?php echo e($conducteur->permis_conduit); ?>"  class="text-decoration-none text-primary">Télécharger <i class="uil uil-download-alt"></i></a></p>
                             </div>
                         </div>
                         <hr>
@@ -88,7 +88,7 @@
                                 <p class="mb-0 text-black">CNI</p>
                             </div>
                             <div class="col-sm-9 text-end">
-                                <p class="text-muted mb-0"><a href="<?php echo e(asset($conducteur->piece_identite)); ?>" class="text-decoration-none text-primary">Télécharger <i class="uil uil-download-alt"></i></a></p>
+                                <p class="text-muted mb-0"><a href="<?php echo e($conducteur->piece_identite); ?>" class="text-decoration-none text-primary">Télécharger <i class="uil uil-download-alt"></i></a></p>
                             </div>
                         </div>
                         <hr>
@@ -98,7 +98,7 @@
                                 <p class="mb-0 text-black">Contrat baille</p>
                             </div>
                             <div class="col-sm-9 text-end">
-                                <p class="text-muted mb-0"><a href="<?php echo e(asset($conducteur->contrat_baille)); ?>" class="text-decoration-none text-primary">Télécharger <i class="uil uil-download-alt"></i></a></p>
+                                <p class="text-muted mb-0"><a href="<?php echo e($conducteur->contrat_baille); ?>" class="text-decoration-none text-primary">Télécharger <i class="uil uil-download-alt"></i></a></p>
                             </div>
                         </div>
 
@@ -206,11 +206,11 @@
                                     <td scope="row"><b class="text-primary-"><?php echo e($i); ?></b></td>
                                     <td><?php echo e($transport->created_at->format('d/m/Y à H:i:s')); ?></td>
                                     <td>
-                                        <img src="<?php echo e(asset($transport->user->image_profil)); ?>" class="rounded-circle client-image" alt="">
+                                        <img src="<?php echo e($transport->user->image_profil); ?>" class="rounded-circle client-image" alt="">
                                         <span class="ms-2"><a href="<?php echo e(route('admin.client', ['id' => $transport->user->id])); ?>"><?php echo e(ucfirst($transport->user->last_name).' '.ucfirst($transport->user->first_name)); ?></a></span>
                                     </td>
                                     <td>
-                                        <img src="<?php echo e(asset($conducteur->user->image_profil)); ?>" class="rounded-circle client-image" alt="">
+                                        <img src="<?php echo e($conducteur->user->image_profil); ?>" class="rounded-circle client-image" alt="">
                                         <span class="ms-2"><a href="<?php echo e(route('admin.conducteur', ['id' => $conducteur->id])); ?>"><?php echo e(ucfirst($conducteur->user->last_name).' '.ucfirst($conducteur->user->first_name)); ?></a></span>
                                     </td>
                                     <td><?php echo e($transport->price); ?> FCFA</td>

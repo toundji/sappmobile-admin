@@ -31,8 +31,8 @@
                             </td>
                             <td><?php echo e($entreprise->ville); ?></td>
                             <td>
-                                <?php if($entreprise->user): ?>
-                                    <a href="<?php echo e(route('admin.client', ['id' => $entreprise->user->id])); ?>"><?php echo e(ucfirst($entreprise->user->last_name).' '.ucfirst($entreprise->user->first_name)); ?></a>
+                                <?php if($entreprise->agent_entreprise): ?>
+                                    <a href="<?php echo e(route('admin.client', ['id' => $entreprise->agent_entreprise->user->id])); ?>"><?php echo e(ucfirst($entreprise->agent_entreprise->user->last_name).' '.ucfirst($entreprise->agent_entreprise->user->first_name)); ?></a>
                                 <?php endif; ?>
                             </td>
                             <td class="text-center"><a href="<?php echo e(route('admin.entreprise', ['id' => $entreprise->id])); ?>"><i class="uil uil-eye icon-view"></i></a></td>

@@ -36,7 +36,7 @@
                         <tr class="border-white">
                             <td scope="row"><b class="text-primary-">{{ $i }}</b></td>
                             <td>
-                                <img src="{{ asset($user->image_profil) }}" class="rounded-circle client-image" alt="">
+                                <img src="$user->image_profil" class="rounded-circle client-image" alt="">
                                 <span class="ms-2"><a href="{{ route('admin.conducteur', ['id' => $conducteur->id]) }}">{{ ucfirst($user->last_name).' '.ucfirst($user->first_name) }}</a></span>
                             </td>
                             <td>{{ $conducteur->created_at->format('d/m/Y') }}</td>

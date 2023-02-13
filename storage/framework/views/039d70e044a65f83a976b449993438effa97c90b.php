@@ -46,7 +46,7 @@
                         Registre de commerce
                     </div>
                     <div class="col-sm-7 text-end">
-                        <a href="<?php echo e(asset($entreprise->registre_commerce)); ?>">Télécharger</a>
+                        <a href="<?php echo e($entreprise->registre_commerce); ?>">Télécharger</a>
                     </div>
                 </div>
 
@@ -65,7 +65,7 @@
                             Photo de l'agent
                         </div>
                         <div class="col-sm-7 text-end">
-                            <img src="<?php echo e(asset($entreprise->agent_entreprise->user->image_profil)); ?>"  class="rounded-circle client-image" alt="">
+                            <img src="<?php echo e($entreprise->agent_entreprise->user->image_profil); ?>"  class="rounded-circle client-image" alt="">
                         </div>
                     </div>
 
@@ -74,7 +74,7 @@
                             CNI de l'agent
                         </div>
                         <div class="col-sm-7 text-end">
-                            <a href="<?php echo e(asset($entreprise->agent_entreprise->piece_identite)); ?>">Télécharger</a>
+                            <a href="<?php echo e($entreprise->agent_entreprise->piece_identite); ?>">Télécharger</a>
                         </div>
                     </div>
                 <?php endif; ?>
@@ -107,12 +107,9 @@
                               </tr>
                             </thead>
                             <tbody  class="border-white">
-                                <?php
-                                    $i = 1;
-                                ?>
-                                <?php $__currentLoopData = $entreprise->vehicules; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vehicule): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php $__currentLoopData = $entreprise->vehicules; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i => $vehicule): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr class="border-white">
-                                        <td scope="row"><b class="text-primary-"><?php echo e($i); ?></b></td>
+                                        <td scope="row"><b class="text-primary-"><?php echo e($i + 1); ?></b></td>
                                         <td><?php echo e($vehicule->matricule); ?></td>
                                         <td><?php echo e($vehicule->category->name); ?></td>
                                         <td><?php echo e($vehicule->model); ?></td>
@@ -125,9 +122,6 @@
                                         </td>
                                         <td class="text-center"><a href="<?php echo e(route('admin.vehicule', ['id' => $vehicule->id])); ?>"><i class="uil uil-eye icon-view"></i></a></td>
                                     </tr>
-                                    <?php
-                                        $i++
-                                    ?>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                             </tbody>

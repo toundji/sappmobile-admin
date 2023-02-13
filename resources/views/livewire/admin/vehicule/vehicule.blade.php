@@ -134,7 +134,7 @@
                     <div class="col-sm-7 fw-bold text-black- text-end">
                         @if ($vehicule->conducteur !== null)
                             <a href="{{ route('admin.conducteur', ['id' => $vehicule->conducteur->id]) }}" class="text-decoration-none text-secondary">
-                                <img src="{{ asset($vehicule->conducteur->user->image_profil) }}" class="complice_img me-1" alt="">
+                                <img src="{{ $vehicule->conducteur->user->image_profil }}" class="complice_img me-1" alt="">
                                 {{ ucfirst($vehicule->conducteur->user->last_name).' '.ucfirst($vehicule->conducteur->user->first_name) }}
                             </a>
                         @endif
@@ -153,7 +153,7 @@
                         @endphp
                         <p class="p-3 mt-2 card bg-light">
                             <a href="{{ route('admin.conducteur', ['id' => $conducteur1->id]) }}"  class="text-decoration-none text-primary-">
-                                <img src="{{ asset($user1->image_profil) }}" class="complice_img me-2" alt="">
+                                <img src="{{ $user1->image_profil }}" class="complice_img me-2" alt="">
                                 {{ ucfirst($user1->last_name).' '.ucfirst($user1->first_name) }}
                             </a>
                             <span class="mt-2">Date debut : {{ $item->created_at }}</span>

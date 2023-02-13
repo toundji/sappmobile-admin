@@ -18,13 +18,10 @@
                   </tr>
                 </thead>
                 <tbody  class="border-white bg-white">
-                    @php
-                        $i = 1;
-                    @endphp
-                    @foreach ($categories as $category)
+                    @foreach ($categories as $i => $category)
                         <tr class="border-white">
                             <td scope="row">
-                                <img src="{{ asset($category->image_category) }}" class="rounded-circle client-image" alt="">
+                                <img src="{{ $category->image_category }}" class="rounded-circle client-image" alt="">
                             </td>
                             <td>{{ $category->name }} </td>
                             <td>{{ $category->metter_price }} FCFA</td>
@@ -35,9 +32,6 @@
                                 </a>
                             <td>
                         </tr>
-                        @php
-                            $i++
-                        @endphp
                     @endforeach
                 </tbody>
             </table>

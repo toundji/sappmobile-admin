@@ -21,7 +21,7 @@
                         <tr class="border-white">
                             <td scope="row"><b class="text-primary-">{{ $i + 1}}</b></td>
                             <td>
-                                <img src="{{ asset($user->image_profil) }}" class="rounded-circle user-image" alt="">
+                                <img src="$user->image_profil" class="rounded-circle user-image" alt="">
                                 <span class="ms-2"><a href="{{ route('finance.client', ['id' => $user->id, "type" => $type]) }}">{{ ucfirst($user->last_name).' '.ucfirst($user->first_name) }}</a></span>
                             </td>
                             <td>{{ $user->created_at->format('d/m/Y') }}</td>

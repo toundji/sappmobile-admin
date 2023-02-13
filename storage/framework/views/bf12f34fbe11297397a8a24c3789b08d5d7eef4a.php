@@ -142,7 +142,7 @@
                     <div class="col-sm-7 fw-bold text-black- text-end">
                         <?php if($vehicule->conducteur !== null): ?>
                             <a href="<?php echo e(route('admin.conducteur', ['id' => $vehicule->conducteur->id])); ?>" class="text-decoration-none text-secondary">
-                                <img src="<?php echo e(asset($vehicule->conducteur->user->image_profil)); ?>" class="complice_img me-1" alt="">
+                                <img src="<?php echo e($vehicule->conducteur->user->image_profil); ?>" class="complice_img me-1" alt="">
                                 <?php echo e(ucfirst($vehicule->conducteur->user->last_name).' '.ucfirst($vehicule->conducteur->user->first_name)); ?>
 
                             </a>
@@ -162,7 +162,7 @@
                         ?>
                         <p class="p-3 mt-2 card bg-light">
                             <a href="<?php echo e(route('admin.conducteur', ['id' => $conducteur1->id])); ?>"  class="text-decoration-none text-primary-">
-                                <img src="<?php echo e(asset($user1->image_profil)); ?>" class="complice_img me-2" alt="">
+                                <img src="<?php echo e($user1->image_profil); ?>" class="complice_img me-2" alt="">
                                 <?php echo e(ucfirst($user1->last_name).' '.ucfirst($user1->first_name)); ?>
 
                             </a>

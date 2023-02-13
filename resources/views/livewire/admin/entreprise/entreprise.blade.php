@@ -44,7 +44,7 @@
                         Registre de commerce
                     </div>
                     <div class="col-sm-7 text-end">
-                        <a href="{{ asset($entreprise->registre_commerce) }}">Télécharger</a>
+                        <a href="{{ $entreprise->registre_commerce }}">Télécharger</a>
                     </div>
                 </div>
 
@@ -63,7 +63,7 @@
                             Photo de l'agent
                         </div>
                         <div class="col-sm-7 text-end">
-                            <img src="{{ asset($entreprise->agent_entreprise->user->image_profil) }}"  class="rounded-circle client-image" alt="">
+                            <img src="{{ $entreprise->agent_entreprise->user->image_profil }}"  class="rounded-circle client-image" alt="">
                         </div>
                     </div>
 
@@ -72,7 +72,7 @@
                             CNI de l'agent
                         </div>
                         <div class="col-sm-7 text-end">
-                            <a href="{{ asset($entreprise->agent_entreprise->piece_identite) }}">Télécharger</a>
+                            <a href="{{ $entreprise->agent_entreprise->piece_identite }}">Télécharger</a>
                         </div>
                     </div>
                 @endif
@@ -105,12 +105,9 @@
                               </tr>
                             </thead>
                             <tbody  class="border-white">
-                                @php
-                                    $i = 1;
-                                @endphp
-                                @foreach ($entreprise->vehicules as $vehicule)
+                                @foreach ($entreprise->vehicules as $i => $vehicule)
                                     <tr class="border-white">
-                                        <td scope="row"><b class="text-primary-">{{ $i }}</b></td>
+                                        <td scope="row"><b class="text-primary-">{{ $i + 1 }}</b></td>
                                         <td>{{ $vehicule->matricule }}</td>
                                         <td>{{ $vehicule->category->name }}</td>
                                         <td>{{ $vehicule->model }}</td>
@@ -122,9 +119,6 @@
                                         </td>
                                         <td class="text-center"><a href="{{ route('admin.vehicule', ['id' => $vehicule->id]) }}"><i class="uil uil-eye icon-view"></i></a></td>
                                     </tr>
-                                    @php
-                                        $i++
-                                    @endphp
                                 @endforeach
 
                             </tbody>

@@ -18,13 +18,10 @@
                   </tr>
                 </thead>
                 <tbody  class="border-white bg-white">
-                    <?php
-                        $i = 1;
-                    ?>
-                    <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i => $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr class="border-white">
                             <td scope="row">
-                                <img src="<?php echo e(asset($category->image_category)); ?>" class="rounded-circle client-image" alt="">
+                                <img src="<?php echo e($category->image_category); ?>" class="rounded-circle client-image" alt="">
                             </td>
                             <td><?php echo e($category->name); ?> </td>
                             <td><?php echo e($category->metter_price); ?> FCFA</td>
@@ -35,9 +32,6 @@
                                 </a>
                             <td>
                         </tr>
-                        <?php
-                            $i++
-                        ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
             </table>

@@ -25,7 +25,7 @@
                         <tr class="border-white">
                             <td scope="row"><b class="text-primary-"><?php echo e($i); ?></b></td>
                             <td>
-                                <img src="<?php echo e(asset($user->image_profil)); ?>" class="rounded-circle user-image" alt="">
+                                <img src="$user->image_profil" class="rounded-circle user-image" alt="">
                                 <span class="ms-2"><a href="<?php echo e(route('admin.client', ['id' => $user->id])); ?>"><?php echo e(ucfirst($user->last_name).' '.ucfirst($user->first_name)); ?></a></span>
                             </td>
                             <td><?php echo e($user->created_at->format('d/m/Y')); ?></td>

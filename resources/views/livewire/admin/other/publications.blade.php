@@ -7,7 +7,7 @@
         @foreach ($publications as $publication)
             <div class="col-6 " >
                 <div class="bg-white rounded border pb-1">
-                    <img src="{{ asset($publication->image) }}" alt="" class="w-100" style="object-fit: cover; height: 200px">
+                    <img src="{{ $publication->image }}" alt="" class="w-100" style="object-fit: cover; height: 200px">
                     <div class="mx-4 my-3">
                         <h6>{{ $publication['name'] }}</h6>
                         @if ($publication['link'] !== "" && $publication['link'] !== null)
