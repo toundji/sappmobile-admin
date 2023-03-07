@@ -1,9 +1,5 @@
 <div class="container-fluid">
 
-    @php
-        $user = getUser($conducteur->user_id);
-    @endphp
-
     <div class="container-fluid banner">
         <h4>SAPP MOBILE > Conducteur > {{ ucfirst($user->last_name).' '.ucfirst($user->first_name) }}</h4>
     </div>
@@ -17,19 +13,23 @@
             <div class="col-lg-4">
               	<div class="card mb-4">
 					<div class="card-body text-center">
-						<img src="$user->image_profil" alt="avatar" class="rounded-circle img-fluid" style="width: 100px; height: 100px; object-fit: cover">
+						<img src="{{ $conducteur->user->image_profil }}" alt="avatar" class="rounded-circle img-fluid" style="width: 100px; height: 100px; object-fit: cover">
 						<h5 class="my-3"><a href="{{ route('admin.client', ['id' => $user->id]) }}">{{ ucfirst($user->last_name).' '.ucfirst($user->first_name) }}</a></h5>
 						<p class="text-muted mb-4">{{ $user->email }}</p>
-                        <p class="text-muted mb-4">Statut : {{ $conducteur->status === 0 ? "En cours" : ($conducteur->status === 1 ? "Approuver" : "Rejeter") }}</p>
-                        @if ($conducteur->status === -1)
+                        <p class="text-muted mb-4">Statut : {{ $conducteur->ask_status }}</p>
+                        @if ($conducteur->ask_status === "REFUSE")
                             <button type="button" class="btn btn-outline-danger btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal3">Voir le message de rejet</button>
                         @endif
 						<div class="d-flex justify-content-center mb-2">
 						@if (autorisationAuth("conducteur_edit"))
-                            @if ($conducteur->status === 1)
-                                <button type="button" class="btn btn-outline-danger btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal2">Bloquer</button>
+                            @if ($conducteur->ask_status === "APPROUVE")
+                                @if ($conducteur->status == 1)
+                                    <button type="button" class="btn btn-outline-danger btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal2">Bloquer</button>
+                                @else
+                                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal4">Débloquer</button>
+                                @endif
                             @endif
-                            @if ($conducteur->status === 0)
+                            @if ($conducteur->ask_status === "DEMANDE")
                                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Approuver</button>
                                 <button class="btn btn-outline-warning ms-1" data-bs-toggle="modal" data-bs-target="#exampleModal1">Refuser</button>
                             @endif
@@ -78,7 +78,7 @@
                                 <p class="mb-0 text-black">Permis</p>
                             </div>
                             <div class="col-sm-9 text-end">
-                                <p class="text-muted mb-0"><a href="{{ $conducteur->permis_conduit }}"  class="text-decoration-none text-primary">Télécharger <i class="uil uil-download-alt"></i></a></p>
+                                <p class="text-muted mb-0"><a href="{{ $conducteur->permis_conduit   }}"  class="text-decoration-none text-primary">Télécharger <i class="uil uil-download-alt"></i></a></p>
                             </div>
                         </div>
                         <hr>
@@ -120,46 +120,37 @@
                             <i class="uil uil-car text-danger"></i>
                         </li>
 
-                        @if (count($conducteur->vehicules) > 0)
+                        @if ($conducteur->vehicule != null)
                             <div class="table-responsive-sm">
                                 <table class="table bg-white rounded align-middle">
                                     <thead class="bg-primary- border-bottom-black">
-                                    <tr class="border-white text-white">
-                                        <th>#</th>
-                                        <th>Matricule</th>
-                                        <th>Catégorie </th>
-                                        <th>Model</th>
-                                        <th>Entreprise</th>
-                                        <th class="text-center">Detail</th>
-                                    </tr>
+                                        <tr class="border-white text-white">
+                                            <th>#</th>
+                                            <th>Matricule</th>
+                                            <th>Catégorie </th>
+                                            <th>Model</th>
+                                            <th>Entreprise</th>
+                                            <th class="text-center">Detail</th>
+                                        </tr>
                                     </thead>
                                     <tbody  class="border-white">
-                                        @php
-                                            $i = 1;
-                                        @endphp
-                                        @foreach ($conducteur->vehicules as $vehicule)
-                                            <tr class="border-white">
-                                                <td scope="row"><b class="text-primary-">{{ $i }}</b></td>
-                                                <td>
-                                                    <a href="{{ route('admin.conducteur', ['id' => $vehicule->id]) }}">{{ $vehicule->matricule }}</a>
-                                                </td>
-                                                <td>
-                                                    @if ($vehicule->category)
-                                                        {{ $vehicule->category->name }}
-                                                    @endif
-                                                </td>
-                                                <td>{{ $vehicule->model }}</td>
-                                                <td>
-                                                    @if ($vehicule->entreprise)
-                                                        {{ $vehicule->entreprise->name }}
-                                                    @endif
-                                                <td class="text-center"><a href="{{ route('admin.vehicule', ['id' => $vehicule->id]) }}"><i class="uil uil-eye icon-view"></i></a></td>
-                                            </tr>
-                                            @php
-                                                $i++
-                                            @endphp
-                                        @endforeach
-
+                                        <tr class="border-white">
+                                            <td scope="row"><b class="text-primary-">1</b></td>
+                                            <td>
+                                                <a href="{{ route('admin.conducteur', ['id' => $conducteur->vehicule->id]) }}">{{ $conducteur->vehicule->matricule }}</a>
+                                            </td>
+                                            <td>
+                                                @if ($conducteur->vehicule->category)
+                                                    {{ $conducteur->vehicule->category->name }}
+                                                @endif
+                                            </td>
+                                            <td>{{ $conducteur->vehicule->model }}</td>
+                                            <td>
+                                                @if ($conducteur->vehicule->entreprise)
+                                                    {{ $conducteur->vehicule->entreprise->name }}
+                                                @endif
+                                            <td class="text-center"><a href="{{ route('admin.vehicule', ['id' => $conducteur->vehicule->id]) }}"><i class="uil uil-eye icon-view"></i></a></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -196,12 +187,9 @@
                           </tr>
                         </thead>
                         <tbody  class="border-white">
-                            @php
-                                $i = 1;
-                            @endphp
-                            @foreach ($conducteur->transports as $transport)
+                            @foreach ($conducteur->transports as $i => $transport)
                                 <tr class="border-white">
-                                    <td scope="row"><b class="text-primary-">{{ $i }}</b></td>
+                                    <td scope="row"><b class="text-primary-">{{ $i + 1 }}</b></td>
                                     <td>{{ $transport->created_at->format('d/m/Y à H:i:s') }}</td>
                                     <td>
                                         <img src="{{ $transport->user->image_profil }}" class="rounded-circle client-image" alt="">
@@ -213,21 +201,10 @@
                                     </td>
                                     <td>{{ $transport->price }} FCFA</td>
                                     <td>
-                                        @php
-                                            if($transport->status === 1) {
-                                                echo "Terminer";
-                                            } elseif ($transport->status === 0) {
-                                                echo "En cours";
-                                            } elseif ($transport->status === -1) {
-                                                echo "Annuler";
-                                            }
-                                        @endphp
+                                        {{ $transport->ask_status }}
                                     </td>
                                     <td class="text-center"><a href="{{ route('admin.operation', ['id' => $transport->id]) }}"><i class="uil uil-eye icon-view"></i></a></td>
                                 </tr>
-                                @php
-                                    $i++
-                                @endphp
                             @endforeach
 
                         </tbody>
@@ -310,7 +287,28 @@
         </div>
     </div>
 
-    @if ($conducteur->status === -1)
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModal4Label" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModal4Label">Debloqué</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Voulez-vous vraiment débloqué ce conducteur ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-success" wire:loading.remove wire:target="disblock" wire:click="disblock">Débloquer</button>
+                <button type="button" class="btn btn-success" wire:loading wire:target="disblock" disabled>En cours</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    @if ($conducteur->ask_status === "REJETE")
         <!-- Modal -->
         <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModal3Label" aria-hidden="true">
             <div class="modal-dialog">

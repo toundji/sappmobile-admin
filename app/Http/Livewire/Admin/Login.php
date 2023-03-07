@@ -59,10 +59,10 @@ class Login extends Component
 
                     return redirect()->route('admin.clients');
                 } else {
-                    session()->flash('message', "Email ou Mot de passeincorrect");
+                    session()->flash('message', "Email ou Mot de passe incorrect");
                 }
             } else {
-                session()->flash('message', "Email ou Mot de passeincorrect");
+                session()->flash('message', "Email ou Mot de passe incorrect");
             }
         }
 

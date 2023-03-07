@@ -30,38 +30,26 @@
                   </tr>
                 </thead>
                 <tbody  class="border-white">
-                    @php
-                        $i = 1;
-                    @endphp
-                    @foreach ($transports as $transport)
+                    @foreach ($transports as $i => $transport)
                         <tr class="border-white">
-                            <td scope="row"><b class="text-primary-">{{ $i }}</b></td>
+                            <td scope="row"><b class="text-primary-">{{ $i + 1 }}</b></td>
                             <td>{{ $transport->created_at->format('d/m/Y à H:i:s') }}</td>
                             <td>
                                 <img src="{{ $transport->user->image_profil }}" class="rounded-circle client-image" alt="">
                                 <span class="ms-2"><a href="{{ route('admin.client', ['id' => $transport->user->id]) }}">{{ ucfirst($transport->user->last_name).' '.ucfirst($transport->user->first_name) }}</a></span>
                             </td>
                             <td>
-                                <img src="{{ $transport->conducteur->user->image_profil }}" class="rounded-circle client-image" alt="">
-                                <span class="ms-2"><a href="{{ route('admin.conducteur', ['id' => $transport->conducteur->user->id]) }}">{{ ucfirst($transport->conducteur->user->last_name).' '.ucfirst($transport->conducteur->user->first_name) }}</a></span>
+                                @if ($transport->conducteur)
+                                    <img src="{{ $transport->conducteur->user->image_profil }}" class="rounded-circle client-image" alt="">
+                                    <span class="ms-2"><a href="{{ route('admin.conducteur', ['id' => $transport->conducteur->user->id]) }}">{{ ucfirst($transport->conducteur->user->last_name).' '.ucfirst($transport->conducteur->user->first_name) }}</a></span>
+                                @endif
                             </td>
                             <td>{{ $transport->price }} FCFA</td>
                             <td>
-                                @php
-                                    if($transport->status === 1) {
-                                        echo "Terminer";
-                                    } elseif ($transport->status === 0) {
-                                        echo "En cours";
-                                    } elseif ($transport->status === -1) {
-                                        echo "Annuler";
-                                    }
-                                @endphp
+                                {{ $transport->status }}
                             </td>
                             <td class="text-center"><a href="{{ route('admin.operation', ['id' => $transport->id]) }}"><i class="uil uil-eye icon-view"></i></a></td>
                         </tr>
-                        @php
-                            $i++
-                        @endphp
                     @endforeach
 
                 </tbody>

@@ -13,15 +13,15 @@ class Conducteur extends Model
 
     protected $guarded = [];
 
-    public function vehicules() {
-        return $this->hasMany(Vehicule::class);
+    public function vehicule() {
+        return $this->belongsTo(Vehicule::class, "id_vehicule");
     }
 
     public function user() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, "id_user");
     }
 
     public function transports() {
-        return $this->hasMany(Transport::class);
+        return $this->hasMany(Transport::class, "id_conducteur");
     }
 }

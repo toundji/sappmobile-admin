@@ -12,16 +12,16 @@ class Vehicule extends Model
     protected $guarded = [];
 
     public function category(){
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, "id_category");
     }
 
 
     public function entreprise(){
-        return $this->belongsTo(Entreprise::class);
+        return $this->belongsTo(Entreprise::class, "id_entreprise");
     }
 
 
-    public function conducteur(){
-        return $this->belongsTo(Conducteur::class);
+    public function conducteur() {
+        return $this->belongsTo(Conducteur::class, "id_conducteur");
     }
 }

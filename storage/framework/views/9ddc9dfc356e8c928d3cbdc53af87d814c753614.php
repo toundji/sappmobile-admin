@@ -2,51 +2,26 @@
 
     
 
+    <?php $__env->startSection('content'); ?>
 
-
-    <?php if($page === "setting"): ?>
-
-        <?php $__env->startSection("content"); ?>
-            <?php
+        <?php
 if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount("admin.setting")->html();
-} elseif ($_instance->childHasBeenRendered('aSTgUsc')) {
-    $componentId = $_instance->getRenderedChildComponentId('aSTgUsc');
-    $componentTag = $_instance->getRenderedChildComponentTagName('aSTgUsc');
+    $html = \Livewire\Livewire::mount($page, ['id' => $id ?? 0, "type" => $type?? "", 'title' => $title ?? "", 'slug' => $slug ?? "", 'status' => $status ?? ""])->html();
+} elseif ($_instance->childHasBeenRendered('CU6dHrk')) {
+    $componentId = $_instance->getRenderedChildComponentId('CU6dHrk');
+    $componentTag = $_instance->getRenderedChildComponentTagName('CU6dHrk');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('aSTgUsc');
+    $_instance->preserveRenderedChild('CU6dHrk');
 } else {
-    $response = \Livewire\Livewire::mount("admin.setting");
+    $response = \Livewire\Livewire::mount($page, ['id' => $id ?? 0, "type" => $type?? "", 'title' => $title ?? "", 'slug' => $slug ?? "", 'status' => $status ?? ""]);
     $html = $response->html();
-    $_instance->logRenderedChild('aSTgUsc', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('CU6dHrk', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
-        <?php $__env->stopSection(); ?>
 
-    <?php elseif($page === "right"): ?>
-
-        <?php $__env->startSection("content"); ?>
-            <?php
-if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount("admin.right")->html();
-} elseif ($_instance->childHasBeenRendered('O0H0aGy')) {
-    $componentId = $_instance->getRenderedChildComponentId('O0H0aGy');
-    $componentTag = $_instance->getRenderedChildComponentTagName('O0H0aGy');
-    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('O0H0aGy');
-} else {
-    $response = \Livewire\Livewire::mount("admin.right");
-    $html = $response->html();
-    $_instance->logRenderedChild('O0H0aGy', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
-}
-echo $html;
-?>
-        <?php $__env->stopSection(); ?>
-
-    <?php endif; ?>
-
+    <?php $__env->stopSection(); ?>
 
 <?php endif; ?>
 
-<?php echo $__env->make("admin.base", ['title' => $title], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH G:\Projets\Laravel\sappmobile\resources\views/admin/all.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('admin.base', ['title' => $title], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH G:\Projets\Laravel\sappmobile\resources\views/admin/all.blade.php ENDPATH**/ ?>

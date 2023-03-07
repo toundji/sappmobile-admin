@@ -8,22 +8,21 @@ use Illuminate\Http\Request;
 class ConducteurController extends Controller
 {
 
-    public function conducteurs($type = "approved") {
-        $page = "conducteurs";
+    public function conducteurs($type = "APPROUVE") {
+        $page = "admin.conducteur.conducteurs";
         $title = "Conducteurs";
 
-        return view("admin.allconducteur", compact("page", "title", "type"));
+        return view("admin.all", compact("page", "title", "type"));
     }
 
 
     public function conducteur($id) {
         $conducteur = Conducteur::where('id', $id)->first();
         if($conducteur != null) {
-            $user = getUser($conducteur->user_id);
-            $page = "conducteur";
+            $user = $conducteur->user;
+            $page = "admin.conducteur.conducteur";
             $title = "Conducteur > ".$user->last_name.' '.$user->first_name;
-            $user_id = $conducteur->user_id;
-            return view("admin.allconducteur", compact("title", "page", "id"));
+            return view("admin.all", compact("title", "page", "id"));
         }
     }
 }

@@ -63,7 +63,7 @@ function getUser($id) {
 }
 
 function getConducteurByUser($id) {
-    return Conducteur::where('user_id', $id)->first();
+    return Conducteur::where('id_user', $id)->first();
 }
 
 function getUserByPhone($email) {
@@ -75,12 +75,12 @@ function getDateLikeNow() {
 }
 
 function getPortefeuille($id) {
-    $compte = PorteFeuille::where('user_id', $id)->first();
+    $compte = PorteFeuille::where('id_user', $id)->first();
     return ($compte != null) ? $compte->solde : 0;
 }
 
 function getBonus($id) {
-    $bonus = Bonus::where('user_id', $id)->first();
+    $bonus = Bonus::where('id_user', $id)->first();
     return ($bonus != null) ? $bonus->valeur_bonus : 0;
 }
 

@@ -44,10 +44,12 @@
                     <div class="col-sm-5 text-secondary">
                         Conducteur
                     </div>
-                    <div class="col-sm-7 text-end">
-                        <img src="{{ $transport->conducteur->user->image_profil }}" class="rounded-circle client-image" alt="">
-                        <span class="ms-2"><a href="{{ route('admin.conducteur', ['id' => $transport->conducteur->id]) }}">{{ ucfirst($transport->conducteur->user->last_name).' '.ucfirst($transport->conducteur->user->first_name) }}</a></span>
-                    </div>
+                    @if ($transport->conducteur)
+                        <div class="col-sm-7 text-end">
+                            <img src="{{ $transport->conducteur->user->image_profil }}" class="rounded-circle client-image" alt="">
+                            <span class="ms-2"><a href="{{ route('admin.conducteur', ['id' => $transport->conducteur->id]) }}">{{ ucfirst($transport->conducteur->user->last_name).' '.ucfirst($transport->conducteur->user->first_name) }}</a></span>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="row mt-4">
@@ -150,7 +152,7 @@
                         Date de paiement espèce client
                     </div>
                     <div class="col-sm-7 text-end">
-                        {{ $transport->user_espece_date ? $transport->user_espece_date->format('d/m/Y à H:i:s') : "" }}
+                        {{ $transport->user_espece_date ?? "" }}
                     </div>
                 </div>
 
@@ -159,7 +161,7 @@
                         Date de reception espèce chauffeur
                     </div>
                     <div class="col-sm-7 text-end">
-                        {{ $transport->driver_espece_date ? $transport->driver_espece_date->format('d/m/Y à H:i:s') : "" }}
+                        {{ $transport->driver_espece_date ?? "" }}
                     </div>
                 </div>
 

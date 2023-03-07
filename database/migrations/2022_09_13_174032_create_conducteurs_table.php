@@ -19,6 +19,7 @@ class CreateConducteursTable extends Migration
             $table->string("piece_identite")->nullable();
             $table->string("contrat_baille")->nullable();
             $table->boolean("status")->default(true);
+            $table->enum("ask_status", ['DEMANDE', 'APPROUVE', 'BLOQUE'])->default("DEMANDE");
             $table->boolean("available")->default(true);
             $table->text("message")->nullable();
             $table->string("code")->nullable();

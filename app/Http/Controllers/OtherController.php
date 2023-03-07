@@ -11,68 +11,68 @@ class OtherController extends Controller
 {
 
     public function faqs() {
-        $page = "faqs";
+        $page = "admin.other.faqs";
         $title = "Liste des FAQ";
-        return view("admin.allother", compact("page", "title"));
+        return view("admin.all", compact("page", "title"));
     }
 
     public function add_faq() {
-        $page = "add-faq";
+        $page = "admin.other.add-faq";
         $title = "Nouvelle FAQ";
-        return view("admin.allother", compact("page", "title"));
+        return view("admin.all", compact("page", "title"));
     }
 
 
     public function annonces() {
-        $page = "annonces";
+        $page = "admin.other.annonces";
         $title = "Liste des annonces";
-        return view("admin.allother", compact("page", "title"));
+        return view("admin.all", compact("page", "title"));
     }
 
     public function add_annonce() {
-        $page = "add-annonce";
+        $page = "admin.other.add-annonce";
         $title = "Nouvelle annonce";
-        return view("admin.allother", compact("page", "title"));
+        return view("admin.all", compact("page", "title"));
     }
 
     public function annonce($id) {
         $annonce = Annonce::where('id', $id)->first();
         if($annonce != null) {
-            $page = "edit-annonce";
+            $page = "admin.other.edit-annonce";
             $title = "Annonce > ".$annonce->name;
-            return view("admin.allother", compact("page", "title", "id"));
+            return view("admin.all", compact("page", "title", "id"));
         }
     }
 
 
 
     public function publications() {
-        $page = "publications";
+        $page = "admin.other.publications";
         $title = "Liste des publications";
-        return view("admin.allother", compact("page", "title"));
+        return view("admin.all", compact("page", "title"));
     }
 
     public function add_publication() {
-        $page = "add-publication";
+        $page = "admin.other.add-publication";
         $title = "Nouvelle publication";
-        return view("admin.allother", compact("page", "title"));
+        return view("admin.all", compact("page", "title"));
     }
 
     public function publication($id) {
         $publication = Publication::where('id', $id)->first();
         if($publication != null) {
-            $page = "edit-publication";
+            $page = "admin.other.edit-publication";
             $title = "Publication > ".$publication->name;
-            return view("admin.allother", compact("page", "title", "id"));
+            return view("admin.all", compact("page", "title", "id"));
         }
     }
 
     public function faq($id) {
         $faq = Faq::where('id', $id)->first();
         if($faq != null) {
-            $page = "faq";
+            $page = "admin.other.faq";
             $title = "faq > ".$faq->quiz;
-            return view("admin.allother", compact("page", "title", "id"));
+            return view("admin.all", compact("page", "title", "id"));
         }
     }
 }

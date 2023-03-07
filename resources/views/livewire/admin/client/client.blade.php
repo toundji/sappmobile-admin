@@ -54,6 +54,15 @@
                     <hr>
                     <div class="row">
                         <div class="col-sm-3">
+                        <p class="mb-0 text-black">Status</p>
+                        </div>
+                        <div class="col-sm-9 text-end">
+                        <p class="text-muted mb-0">{{ $user->status }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
                         <p class="mb-0 text-black">portefeuille</p>
                         </div>
                         <div class="col-sm-9 text-end">
@@ -155,12 +164,9 @@
                       </tr>
                     </thead>
                     <tbody  class="border-white">
-                        @php
-                            $i = 1;
-                        @endphp
-                        @foreach ($user->transports as $transport)
+                        @foreach ($user->transports as $i => $transport)
                             <tr class="border-white">
-                                <td scope="row"><b class="text-primary-">{{ $i }}</b></td>
+                                <td scope="row"><b class="text-primary-">{{ $i + 1 }}</b></td>
                                 <td>{{ $transport->created_at->format('d/m/Y à H:i:s') }}</td>
                                 <td>
                                     <img src="{{ $transport->user->image_profil }}" class="rounded-circle client-image" alt="">
@@ -176,9 +182,6 @@
                                 </td>
                                 <td class="text-center"><a href="{{ route('admin.operation', ['id' => $transport->id]) }}"><i class="uil uil-eye icon-view"></i></a></td>
                             </tr>
-                            @php
-                                $i++
-                            @endphp
                         @endforeach
 
                     </tbody>

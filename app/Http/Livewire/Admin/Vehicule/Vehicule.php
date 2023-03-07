@@ -9,18 +9,18 @@ use Livewire\Component;
 
 class Vehicule extends Component
 {
-    public $vehicule_id;
+    public $id_vehicule;
     public $message;
 
     public function mount($id) {
-        $this->vehicule_id = $id;
+        $this->id_vehicule = $id;
     }
 
     public function render()
     {
         return view('livewire.admin.vehicule.vehicule', [
-            "vehicule" => ModelsVehicule::where('id', $this->vehicule_id)->first(),
-            "history" => VehiculeConducteurHistory::where('vehicule_id', $this->vehicule_id)->orderBy('id', 'desc')->get()
+            "vehicule" => ModelsVehicule::where('id', $this->id_vehicule)->first(),
+            "history" => VehiculeConducteurHistory::where('id_vehicule', $this->id_vehicule)->orderBy('id', 'desc')->get()
         ]);
     }
 }

@@ -19,7 +19,7 @@
                 <form wire:submit.prevent="edit_vehicule" class="row">
                     <div class="col-md-6 mt-4">
                         <label for="" class="mb-2">Classe du véhicule</label>
-                        <select wire:model.defer="category_id" class="form-control-" required>
+                        <select wire:model.defer="id_category" class="form-control-" required>
                             <option value=""></option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -62,11 +62,8 @@
                         <label for="" class="mb-2">Téléhone du conducteur</label>
                         <input list="conducteur" wire:model.defer="conducteur_phone"  class="form-control-">
                         <datalist id="conducteur">
-                            @foreach ($conducteurs as $conducteur)
-                                @php
-                                    $user = getUser($conducteur->user_id);
-                                @endphp
-                                <option value="{{ $user->phone }}">{{ ucfirst($user->last_name).' '.ucfirst($user->first_name) }}</option>
+                            @foreach ($conducteurs as $i => $conducteur)
+                                <option value="{{ $conducteur->user->phone }}">{{ ucfirst($conducteur->user->last_name).' '.ucfirst($conducteur->user->first_name) }}</option>
                             @endforeach
                         </datalist>
                     </div>

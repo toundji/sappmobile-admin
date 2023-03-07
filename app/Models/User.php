@@ -27,14 +27,14 @@ class User extends Authenticatable
     }
 
     public function transports() {
-        return $this->hasMany(Transport::class);
+        return $this->hasMany(Transport::class, "id");
     }
 
     public function complices() {
-        return $this->hasMany(Complice::class);
+        return $this->hasMany(Complice::class, "id");
     }
 
     public function enfants() {
-        return $this->hasMany(Complice::class, "parent_id");
+        return $this->hasMany(Complice::class, "id");
     }
 }

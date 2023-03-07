@@ -8,14 +8,14 @@ class BonusController extends Controller
 {
 
     public function bonuses() {
-        $page = "bonuses";
+        $page = "admin.bonus.bonuses";
         $title = "Liste des clienst qui ont de bonus";
-        return view("admin.allbonus", compact("page", "title"));
+        return view("admin.all", compact("page", "title"));
     }
 
     public function define_bonus() {
-        $page = "define-bonus";
+        $page = "admin.bonus.define-bonus";
         $title = "Définir bonus";
-        return view("admin.allbonus", compact("page", "title"));
+        return view("admin.all", compact("page", "title"));
     }
 }

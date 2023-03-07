@@ -21,7 +21,7 @@
                 <form wire:submit.prevent="edit_vehicule" class="row">
                     <div class="col-md-6 mt-4">
                         <label for="" class="mb-2">Classe du véhicule</label>
-                        <select wire:model.defer="category_id" class="form-control-" required>
+                        <select wire:model.defer="id_category" class="form-control-" required>
                             <option value=""></option>
                             <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($category->id); ?>"><?php echo e($category->name); ?></option>
@@ -64,11 +64,8 @@
                         <label for="" class="mb-2">Téléhone du conducteur</label>
                         <input list="conducteur" wire:model.defer="conducteur_phone"  class="form-control-">
                         <datalist id="conducteur">
-                            <?php $__currentLoopData = $conducteurs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $conducteur): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <?php
-                                    $user = getUser($conducteur->user_id);
-                                ?>
-                                <option value="<?php echo e($user->phone); ?>"><?php echo e(ucfirst($user->last_name).' '.ucfirst($user->first_name)); ?></option>
+                            <?php $__currentLoopData = $conducteurs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i => $conducteur): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($conducteur->user->phone); ?>"><?php echo e(ucfirst($conducteur->user->last_name).' '.ucfirst($conducteur->user->first_name)); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </datalist>
                     </div>

@@ -27,7 +27,7 @@
                         Client
                     </div>
                     <div class="col-sm-7 text-end">
-                        <img src="<?php echo e(asset($transport->user->image_profil)); ?>" class="rounded-circle client-image" alt="">
+                        <img src="<?php echo e($transport->user->image_profil); ?>" class="rounded-circle client-image" alt="">
                         <span class="ms-2"><a href="<?php echo e(route('admin.client', ['id' => $transport->user->id])); ?>"><?php echo e(ucfirst($transport->user->last_name).' '.ucfirst($transport->user->first_name)); ?></a></span>
                     </div>
                 </div>
@@ -46,10 +46,12 @@
                     <div class="col-sm-5 text-secondary">
                         Conducteur
                     </div>
-                    <div class="col-sm-7 text-end">
-                        <img src="<?php echo e(asset($transport->conducteur->user->image_profil)); ?>" class="rounded-circle client-image" alt="">
-                        <span class="ms-2"><a href="<?php echo e(route('admin.conducteur', ['id' => $transport->conducteur->id])); ?>"><?php echo e(ucfirst($transport->conducteur->user->last_name).' '.ucfirst($transport->conducteur->user->first_name)); ?></a></span>
-                    </div>
+                    <?php if($transport->conducteur): ?>
+                        <div class="col-sm-7 text-end">
+                            <img src="<?php echo e($transport->conducteur->user->image_profil); ?>" class="rounded-circle client-image" alt="">
+                            <span class="ms-2"><a href="<?php echo e(route('admin.conducteur', ['id' => $transport->conducteur->id])); ?>"><?php echo e(ucfirst($transport->conducteur->user->last_name).' '.ucfirst($transport->conducteur->user->first_name)); ?></a></span>
+                        </div>
+                    <?php endif; ?>
                 </div>
 
                 <div class="row mt-4">
@@ -159,7 +161,7 @@
                         Date de paiement espèce client
                     </div>
                     <div class="col-sm-7 text-end">
-                        <?php echo e($transport->user_espece_date ? $transport->user_espece_date->format('d/m/Y à H:i:s') : ""); ?>
+                        <?php echo e($transport->user_espece_date ?? ""); ?>
 
                     </div>
                 </div>
@@ -169,7 +171,7 @@
                         Date de reception espèce chauffeur
                     </div>
                     <div class="col-sm-7 text-end">
-                        <?php echo e($transport->driver_espece_date ? $transport->driver_espece_date->format('d/m/Y à H:i:s') : ""); ?>
+                        <?php echo e($transport->driver_espece_date ?? ""); ?>
 
                     </div>
                 </div>

@@ -8,9 +8,9 @@
     <section class="page_content">
 
         <div class="hstack mb-4">
-            <a href="{{ route('admin.conducteurs', ['type' => 'approved']) }}" class="{{ ($status === 1) ? "button" : "button-outline" }} me-2">Approuver</a>
-            <a href="{{ route('admin.conducteurs', ['type' => 'process']) }}" class="{{ ($status === 0) ? "button" : "button-outline" }} me-2">En cours</a>
-            <a href="{{ route('admin.conducteurs', ['type' => 'cancel']) }}" class="{{ ($status === -1) ? "button" : "button-outline" }} me-2">Réjéter</a>
+            <a href="{{ route('admin.conducteurs', ['type' => 'APPROUVE']) }}" class="{{ ($ask_status === "APPROUVE") ? "button" : "button-outline" }} me-2">Approuver</a>
+            <a href="{{ route('admin.conducteurs', ['type' => 'DEMANDE']) }}" class="{{ ($ask_status === "DEMANDE") ? "button" : "button-outline" }} me-2">En cours</a>
+            <a href="{{ route('admin.conducteurs', ['type' => 'REJETE']) }}" class="{{ ($ask_status === "REJETE") ? "button" : "button-outline" }} me-2">Réjéter</a>
         </div>
 
         <div class="table-responsive-sm">
@@ -26,37 +26,20 @@
                   </tr>
                 </thead>
                 <tbody  class="border-white">
-                    @php
-                        $i = 1;
-                    @endphp
-                    @foreach ($conducteurs as $conducteur)
-                        @php
-                            $user = getUser($conducteur->user_id);
-                        @endphp
+                    @foreach ($conducteurs as $i => $conducteur)
                         <tr class="border-white">
-                            <td scope="row"><b class="text-primary-">{{ $i }}</b></td>
+                            <td scope="row"><b class="text-primary-">{{ $i + 1 }}</b></td>
                             <td>
                                 <img src="$user->image_profil" class="rounded-circle client-image" alt="">
-                                <span class="ms-2"><a href="{{ route('admin.conducteur', ['id' => $conducteur->id]) }}">{{ ucfirst($user->last_name).' '.ucfirst($user->first_name) }}</a></span>
+                                <span class="ms-2"><a href="{{ route('admin.conducteur', ['id' => $conducteur->id]) }}">{{ ucfirst($conducteur->user->last_name).' '.ucfirst($conducteur->user->first_name) }}</a></span>
                             </td>
                             <td>{{ $conducteur->created_at->format('d/m/Y') }}</td>
-                            <td>{{ $user->phone }}</td>
+                            <td>{{ $conducteur->user->phone }}</td>
                             <td>
-                                @php
-                                    if($conducteur->status === 1) {
-                                        echo "Approuver";
-                                    } elseif ($conducteur->status === 0) {
-                                        echo "En cours";
-                                    } elseif ($conducteur->status === -1) {
-                                        echo "Rejeter";
-                                    }
-                                @endphp
+                                {{ $conducteur->ask_status }}
                             </td>
                             <td class="text-center"><a href="{{ route('admin.conducteur', ['id' => $conducteur->id]) }}"><i class="uil uil-eye icon-view"></i></a></td>
                         </tr>
-                        @php
-                            $i++
-                        @endphp
                     @endforeach
 
                 </tbody>

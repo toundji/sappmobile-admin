@@ -19,8 +19,8 @@ class Conducteur extends Component
 
     public function mount($id) {
         $this->conducteur_id = $id;
-        $conducteur = ModelsConducteur::where("conducteurs.id", $this->conducteur_id)->first();
-        $this->user = getUser($conducteur->user_id);
+        $conducteur = ModelsConducteur::find($this->conducteur_id);
+        $this->user = $conducteur->user;
     }
 
 
@@ -38,8 +38,23 @@ class Conducteur extends Component
         return redirect()->route('admin.conducteur', ['id' => $this->conducteur_id]);
     }
 
+
+    public function disblock() {
+        ModelsConducteur::where("id", $this->conducteur_id)->update(['status' => 1]);
+
+        $details = [
+            "subject" => "SAPP MOBILE",
+            "title" => "Conducteur SAPP MOBILE",
+            "body" => "Félicitation ".$this->user->first_name." ".$this->user->last_name." votre compte de conducteur SAPP MOBILE vient d'être débloqué. Merci"
+        ];
+
+        Mail::to($this->user->email)->send(new MailSender($details));
+
+        return redirect()->route('admin.conducteur', ['id' => $this->conducteur_id]);
+    }
+
     public function reject() {
-        ModelsConducteur::where("id", $this->conducteur_id)->update(['status' => -1, "message" => $this->message]);
+        ModelsConducteur::where("id", $this->conducteur_id)->update(['ask_status' => "REJETE", "message" => $this->message]);
 
         $details = [
             "subject" => "SAPP MOBILE",
@@ -50,11 +65,11 @@ class Conducteur extends Component
         Mail::to($this->user->email)->send(new MailSender($details));
 
         $this->message = "";
-        return redirect()->route('admin.conducteurs', ['type' => "rejected"]);
+        return redirect()->route('admin.conducteurs', ['type' => "REJETE"]);
     }
 
     public function accept() {
-        ModelsConducteur::where("id", $this->conducteur_id)->update(['status' => 1]);
+        ModelsConducteur::where("id", $this->conducteur_id)->update(['ask_status' => "APPROUVE"]);
 
         $details = [
             "subject" => "SAPP MOBILE",

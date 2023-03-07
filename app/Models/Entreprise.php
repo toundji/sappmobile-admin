@@ -11,17 +11,13 @@ class Entreprise extends Model
     protected $table = "entreprises";
     protected $guarded = [];
 
-
     public function agent_entreprise(){
-        return $this->belongsTo(AgentEntreprise::class);
+        return $this->belongsTo(AgentEntreprise::class, "id_agent_entreprise");
     }
-
-
 
     public function vehicules(){
-        return $this->hasMany(Vehicule::class);
+        return $this->hasMany(Vehicule::class, "id");
     }
-
 
     public function country(){
         return $this->belongsTo(Country::class);

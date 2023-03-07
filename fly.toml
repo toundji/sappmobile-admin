@@ -1,0 +1,78 @@
+# fly.toml file generated for panel-admin on 2023-03-07T13:36:31+01:00
+
+app = "panel-admin"
+kill_signal = "SIGINT"
+kill_timeout = 5
+processes = []
+
+[build]
+  [build.args]
+    NODE_VERSION = "14"
+    PHP_VERSION = "8.1"
+
+[env]
+  APP_ENV = "production"
+  LOG_CHANNEL = "stderr"
+  LOG_LEVEL = "info"
+  LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
+
+  APP_NAME="SAPP MOBILE"
+  APP_DEBUG=true
+
+  ADMIN_URL="admin"
+
+  GOOGLE_MAP_KEY="AIzaSyBtN3wpKITjDPXNkmz9Eo06Ulkoh7KOiqE"
+
+  DB_CONNECTION="pgsql"
+  DB_HOST="137.66.60.49"
+  DB_PORT=5432
+  DB_DATABASE="sappdb"
+  DB_USERNAME="postgres"
+  DB_PASSWORD="mTqC3wHqpO0rO91"
+
+  BROADCAST_DRIVER="log"
+  CACHE_DRIVER="file"
+  FILESYSTEM_DRIVER="local"
+  QUEUE_CONNECTION="sync"
+  SESSION_DRIVER="file"
+  SESSION_LIFETIME="120"
+
+
+  MAIL_MAILER="smtp"
+  MAIL_HOST="smtp.mailtrap.io"
+  MAIL_PORT=2525
+  MAIL_USERNAME="4c4f648becf5a1"
+  MAIL_PASSWORD="2ba72054c953a3"
+  MAIL_ENCRYPTION="tls"
+  MAIL_FROM_ADDRESS="support@sapp-mobile.com"
+  MAIL_FROM_NAME="${APP_NAME}"
+
+
+[experimental]
+  auto_rollback = true
+
+[[services]]
+  http_checks = []
+  internal_port = 8080
+  processes = ["app"]
+  protocol = "tcp"
+  script_checks = []
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    force_https = true
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [[services.tcp_checks]]
+    grace_period = "1s"
+    interval = "15s"
+    restart_limit = 0
+    timeout = "2s"

@@ -19,12 +19,9 @@
                   </tr>
                 </thead>
                 <tbody  class="border-white">
-                    @php
-                        $i = 1;
-                    @endphp
-                    @foreach ($vehicules as $vehicule)
+                    @foreach ($vehicules as $i => $vehicule)
                         <tr class="border-white">
-                            <td scope="row"><b class="text-primary-">{{ $i }}</b></td>
+                            <td scope="row"><b class="text-primary-">{{ $i + 1 }}</b></td>
                             <td>
                                 <a href="{{ route('admin.vehicule', ['id' => $vehicule->id]) }}">{{ $vehicule->matricule }}</a>
                             </td>
@@ -46,9 +43,6 @@
                             </td>
                             <td class="text-center"><a href="{{ route('admin.vehicule', ['id' => $vehicule->id]) }}"><i class="uil uil-eye icon-view"></i></a></td>
                         </tr>
-                        @php
-                            $i++
-                        @endphp
                     @endforeach
 
                 </tbody>

@@ -17,6 +17,6 @@ class AgentEntreprise extends Model
     }
 
     public function entreprise() {
-        return $this->belongsTo(Entreprise::class);
+        return $this->belongsTo(Entreprise::class, "id_entreprise");
     }
 }

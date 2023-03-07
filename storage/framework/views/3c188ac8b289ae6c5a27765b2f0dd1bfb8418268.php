@@ -19,12 +19,9 @@
                   </tr>
                 </thead>
                 <tbody  class="border-white">
-                    <?php
-                        $i = 1;
-                    ?>
-                    <?php $__currentLoopData = $vehicules; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vehicule): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php $__currentLoopData = $vehicules; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i => $vehicule): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr class="border-white">
-                            <td scope="row"><b class="text-primary-"><?php echo e($i); ?></b></td>
+                            <td scope="row"><b class="text-primary-"><?php echo e($i + 1); ?></b></td>
                             <td>
                                 <a href="<?php echo e(route('admin.vehicule', ['id' => $vehicule->id])); ?>"><?php echo e($vehicule->matricule); ?></a>
                             </td>
@@ -47,9 +44,6 @@
                             </td>
                             <td class="text-center"><a href="<?php echo e(route('admin.vehicule', ['id' => $vehicule->id])); ?>"><i class="uil uil-eye icon-view"></i></a></td>
                         </tr>
-                        <?php
-                            $i++
-                        ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                 </tbody>

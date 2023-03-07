@@ -1,9 +1,5 @@
 <div class="container-fluid">
 
-    <?php
-        $user = getUser($conducteur->user_id);
-    ?>
-
     <div class="container-fluid banner">
         <h4>SAPP MOBILE > Conducteur > <?php echo e(ucfirst($user->last_name).' '.ucfirst($user->first_name)); ?></h4>
     </div>
@@ -17,19 +13,23 @@
             <div class="col-lg-4">
               	<div class="card mb-4">
 					<div class="card-body text-center">
-						<img src="$user->image_profil" alt="avatar" class="rounded-circle img-fluid" style="width: 100px; height: 100px; object-fit: cover">
+						<img src="<?php echo e($conducteur->user->image_profil); ?>" alt="avatar" class="rounded-circle img-fluid" style="width: 100px; height: 100px; object-fit: cover">
 						<h5 class="my-3"><a href="<?php echo e(route('admin.client', ['id' => $user->id])); ?>"><?php echo e(ucfirst($user->last_name).' '.ucfirst($user->first_name)); ?></a></h5>
 						<p class="text-muted mb-4"><?php echo e($user->email); ?></p>
-                        <p class="text-muted mb-4">Statut : <?php echo e($conducteur->status === 0 ? "En cours" : ($conducteur->status === 1 ? "Approuver" : "Rejeter")); ?></p>
-                        <?php if($conducteur->status === -1): ?>
+                        <p class="text-muted mb-4">Statut : <?php echo e($conducteur->ask_status); ?></p>
+                        <?php if($conducteur->ask_status === "REFUSE"): ?>
                             <button type="button" class="btn btn-outline-danger btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal3">Voir le message de rejet</button>
                         <?php endif; ?>
 						<div class="d-flex justify-content-center mb-2">
 						<?php if(autorisationAuth("conducteur_edit")): ?>
-                            <?php if($conducteur->status === 1): ?>
-                                <button type="button" class="btn btn-outline-danger btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal2">Bloquer</button>
+                            <?php if($conducteur->ask_status === "APPROUVE"): ?>
+                                <?php if($conducteur->status == 1): ?>
+                                    <button type="button" class="btn btn-outline-danger btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal2">Bloquer</button>
+                                <?php else: ?>
+                                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal4">Débloquer</button>
+                                <?php endif; ?>
                             <?php endif; ?>
-                            <?php if($conducteur->status === 0): ?>
+                            <?php if($conducteur->ask_status === "DEMANDE"): ?>
                                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Approuver</button>
                                 <button class="btn btn-outline-warning ms-1" data-bs-toggle="modal" data-bs-target="#exampleModal1">Refuser</button>
                             <?php endif; ?>
@@ -120,48 +120,39 @@
                             <i class="uil uil-car text-danger"></i>
                         </li>
 
-                        <?php if(count($conducteur->vehicules) > 0): ?>
+                        <?php if($conducteur->vehicule != null): ?>
                             <div class="table-responsive-sm">
                                 <table class="table bg-white rounded align-middle">
                                     <thead class="bg-primary- border-bottom-black">
-                                    <tr class="border-white text-white">
-                                        <th>#</th>
-                                        <th>Matricule</th>
-                                        <th>Catégorie </th>
-                                        <th>Model</th>
-                                        <th>Entreprise</th>
-                                        <th class="text-center">Detail</th>
-                                    </tr>
+                                        <tr class="border-white text-white">
+                                            <th>#</th>
+                                            <th>Matricule</th>
+                                            <th>Catégorie </th>
+                                            <th>Model</th>
+                                            <th>Entreprise</th>
+                                            <th class="text-center">Detail</th>
+                                        </tr>
                                     </thead>
                                     <tbody  class="border-white">
-                                        <?php
-                                            $i = 1;
-                                        ?>
-                                        <?php $__currentLoopData = $conducteur->vehicules; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vehicule): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <tr class="border-white">
-                                                <td scope="row"><b class="text-primary-"><?php echo e($i); ?></b></td>
-                                                <td>
-                                                    <a href="<?php echo e(route('admin.conducteur', ['id' => $vehicule->id])); ?>"><?php echo e($vehicule->matricule); ?></a>
-                                                </td>
-                                                <td>
-                                                    <?php if($vehicule->category): ?>
-                                                        <?php echo e($vehicule->category->name); ?>
+                                        <tr class="border-white">
+                                            <td scope="row"><b class="text-primary-">1</b></td>
+                                            <td>
+                                                <a href="<?php echo e(route('admin.conducteur', ['id' => $conducteur->vehicule->id])); ?>"><?php echo e($conducteur->vehicule->matricule); ?></a>
+                                            </td>
+                                            <td>
+                                                <?php if($conducteur->vehicule->category): ?>
+                                                    <?php echo e($conducteur->vehicule->category->name); ?>
 
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td><?php echo e($vehicule->model); ?></td>
-                                                <td>
-                                                    <?php if($vehicule->entreprise): ?>
-                                                        <?php echo e($vehicule->entreprise->name); ?>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td><?php echo e($conducteur->vehicule->model); ?></td>
+                                            <td>
+                                                <?php if($conducteur->vehicule->entreprise): ?>
+                                                    <?php echo e($conducteur->vehicule->entreprise->name); ?>
 
-                                                    <?php endif; ?>
-                                                <td class="text-center"><a href="<?php echo e(route('admin.vehicule', ['id' => $vehicule->id])); ?>"><i class="uil uil-eye icon-view"></i></a></td>
-                                            </tr>
-                                            <?php
-                                                $i++
-                                            ?>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
+                                                <?php endif; ?>
+                                            <td class="text-center"><a href="<?php echo e(route('admin.vehicule', ['id' => $conducteur->vehicule->id])); ?>"><i class="uil uil-eye icon-view"></i></a></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -198,12 +189,9 @@
                           </tr>
                         </thead>
                         <tbody  class="border-white">
-                            <?php
-                                $i = 1;
-                            ?>
-                            <?php $__currentLoopData = $conducteur->transports; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $transport): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php $__currentLoopData = $conducteur->transports; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i => $transport): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr class="border-white">
-                                    <td scope="row"><b class="text-primary-"><?php echo e($i); ?></b></td>
+                                    <td scope="row"><b class="text-primary-"><?php echo e($i + 1); ?></b></td>
                                     <td><?php echo e($transport->created_at->format('d/m/Y à H:i:s')); ?></td>
                                     <td>
                                         <img src="<?php echo e($transport->user->image_profil); ?>" class="rounded-circle client-image" alt="">
@@ -215,21 +203,11 @@
                                     </td>
                                     <td><?php echo e($transport->price); ?> FCFA</td>
                                     <td>
-                                        <?php
-                                            if($transport->status === 1) {
-                                                echo "Terminer";
-                                            } elseif ($transport->status === 0) {
-                                                echo "En cours";
-                                            } elseif ($transport->status === -1) {
-                                                echo "Annuler";
-                                            }
-                                        ?>
+                                        <?php echo e($transport->ask_status); ?>
+
                                     </td>
                                     <td class="text-center"><a href="<?php echo e(route('admin.operation', ['id' => $transport->id])); ?>"><i class="uil uil-eye icon-view"></i></a></td>
                                 </tr>
-                                <?php
-                                    $i++
-                                ?>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                         </tbody>
@@ -312,7 +290,28 @@
         </div>
     </div>
 
-    <?php if($conducteur->status === -1): ?>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModal4Label" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModal4Label">Debloqué</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Voulez-vous vraiment débloqué ce conducteur ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-success" wire:loading.remove wire:target="disblock" wire:click="disblock">Débloquer</button>
+                <button type="button" class="btn btn-success" wire:loading wire:target="disblock" disabled>En cours</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <?php if($conducteur->ask_status === "REJETE"): ?>
         <!-- Modal -->
         <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModal3Label" aria-hidden="true">
             <div class="modal-dialog">

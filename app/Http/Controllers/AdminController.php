@@ -22,7 +22,7 @@ class AdminController extends Controller
     }
 
     public function setting() {
-        $page = "setting";
+        $page = "admin.setting";
         $title = "Paramètre";
         return view("admin.all", compact("page", "title"));
     }
@@ -55,8 +55,8 @@ class AdminController extends Controller
     public function direction($id) {
         $operation = Transport::where('id', $id)->first();
         if($operation != null) {
-            $localisation_id_depart = Localisation::where('id', $operation->localisation_id_depart)->first();
-            $localisation_id_arrive = Localisation::where('id', $operation->localisation_id_arrive)->first();
+            $localisation_id_depart = Localisation::where('id', $operation->id_depart)->first();
+            $localisation_id_arrive = Localisation::where('id', $operation->id_arrive)->first();
             return view("direction", compact("localisation_id_depart", "localisation_id_arrive"));
         }
     }

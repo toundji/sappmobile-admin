@@ -21,17 +21,17 @@ class Transport extends Model
     }
 
     public function vehicule(){
-        return $this->belongsTo(Vehicule::class);
+        return $this->belongsTo(Vehicule::class, "id_vehicule");
     }
 
     public function conducteur(){
-        return $this->belongsTo(Conducteur::class);
+        return $this->belongsTo(Conducteur::class, "id_conducteur");
     }
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, "id_user");
     }
 
     public function transaction(){
-        return $this->belongsTo(Transaction::class);
+        return $this->belongsTo(Transaction::class, "id_transaction");
     }
 }

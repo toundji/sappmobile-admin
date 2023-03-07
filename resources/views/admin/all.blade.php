@@ -1,22 +1,11 @@
 @isset($page)
 
-    @extends("admin.base", ['title' => $title])
+    @extends('admin.base', ['title' => $title])
 
+    @section('content')
 
+        @livewire($page, ['id' => $id ?? 0, "type" => $type?? "", 'title' => $title ?? "", 'slug' => $slug ?? "", 'status' => $status ?? ""])
 
-    @if ($page === "setting")
-
-        @section("content")
-            @livewire("admin.setting")
-        @endsection
-
-    @elseif ($page === "right")
-
-        @section("content")
-            @livewire("admin.right")
-        @endsection
-
-    @endif
-
+    @endsection
 
 @endisset

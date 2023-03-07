@@ -11,24 +11,24 @@ class Conducteurs extends Component
 
     public $title;
 
-    public $status = 1;
+    public $ask_status = "APPROUVE";
 
     public function mount($title, $type) {
         $this->title = $title;
 
-        if ($type == "approved") {
-            $this->status = 1;
-        } else if($type == "process") {
-            $this->status = 0;
+        if ($type == "APPROUVE") {
+            $this->ask_status = "APPROUVE";
+        } else if($type == "DEMANDE") {
+            $this->ask_status = "DEMANDE";
         } else {
-            $this->status = -1;
+            $this->ask_status = "REJETE";
         }
     }
 
     public function render()
     {
         return view('livewire.admin.conducteur.conducteurs', [
-            "conducteurs" => Conducteur::where('status', $this->status)->get()
+            "conducteurs" => Conducteur::where('ask_status', $this->ask_status)->get()
         ]);
     }
 }

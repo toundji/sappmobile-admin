@@ -51,6 +51,15 @@
                     <hr>
                     <div class="row">
                         <div class="col-sm-3">
+                        <p class="mb-0 text-black">Status</p>
+                        </div>
+                        <div class="col-sm-9 text-end">
+                        <p class="text-muted mb-0"><?php echo e($user->status); ?></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
                         <p class="mb-0 text-black">portefeuille</p>
                         </div>
                         <div class="col-sm-9 text-end">
@@ -152,12 +161,9 @@
                       </tr>
                     </thead>
                     <tbody  class="border-white">
-                        <?php
-                            $i = 1;
-                        ?>
-                        <?php $__currentLoopData = $user->transports; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $transport): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php $__currentLoopData = $user->transports; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i => $transport): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr class="border-white">
-                                <td scope="row"><b class="text-primary-"><?php echo e($i); ?></b></td>
+                                <td scope="row"><b class="text-primary-"><?php echo e($i + 1); ?></b></td>
                                 <td><?php echo e($transport->created_at->format('d/m/Y à H:i:s')); ?></td>
                                 <td>
                                     <img src="<?php echo e($transport->user->image_profil); ?>" class="rounded-circle client-image" alt="">
@@ -174,9 +180,6 @@
                                 </td>
                                 <td class="text-center"><a href="<?php echo e(route('admin.operation', ['id' => $transport->id])); ?>"><i class="uil uil-eye icon-view"></i></a></td>
                             </tr>
-                            <?php
-                                $i++
-                            ?>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                     </tbody>

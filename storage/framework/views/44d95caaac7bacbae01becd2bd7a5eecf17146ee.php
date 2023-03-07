@@ -30,38 +30,27 @@
                   </tr>
                 </thead>
                 <tbody  class="border-white">
-                    <?php
-                        $i = 1;
-                    ?>
-                    <?php $__currentLoopData = $transports; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $transport): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php $__currentLoopData = $transports; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i => $transport): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr class="border-white">
-                            <td scope="row"><b class="text-primary-"><?php echo e($i); ?></b></td>
+                            <td scope="row"><b class="text-primary-"><?php echo e($i + 1); ?></b></td>
                             <td><?php echo e($transport->created_at->format('d/m/Y à H:i:s')); ?></td>
                             <td>
                                 <img src="<?php echo e($transport->user->image_profil); ?>" class="rounded-circle client-image" alt="">
                                 <span class="ms-2"><a href="<?php echo e(route('admin.client', ['id' => $transport->user->id])); ?>"><?php echo e(ucfirst($transport->user->last_name).' '.ucfirst($transport->user->first_name)); ?></a></span>
                             </td>
                             <td>
-                                <img src="<?php echo e($transport->conducteur->user->image_profil); ?>" class="rounded-circle client-image" alt="">
-                                <span class="ms-2"><a href="<?php echo e(route('admin.conducteur', ['id' => $transport->conducteur->user->id])); ?>"><?php echo e(ucfirst($transport->conducteur->user->last_name).' '.ucfirst($transport->conducteur->user->first_name)); ?></a></span>
+                                <?php if($transport->conducteur): ?>
+                                    <img src="<?php echo e($transport->conducteur->user->image_profil); ?>" class="rounded-circle client-image" alt="">
+                                    <span class="ms-2"><a href="<?php echo e(route('admin.conducteur', ['id' => $transport->conducteur->user->id])); ?>"><?php echo e(ucfirst($transport->conducteur->user->last_name).' '.ucfirst($transport->conducteur->user->first_name)); ?></a></span>
+                                <?php endif; ?>
                             </td>
                             <td><?php echo e($transport->price); ?> FCFA</td>
                             <td>
-                                <?php
-                                    if($transport->status === 1) {
-                                        echo "Terminer";
-                                    } elseif ($transport->status === 0) {
-                                        echo "En cours";
-                                    } elseif ($transport->status === -1) {
-                                        echo "Annuler";
-                                    }
-                                ?>
+                                <?php echo e($transport->status); ?>
+
                             </td>
                             <td class="text-center"><a href="<?php echo e(route('admin.operation', ['id' => $transport->id])); ?>"><i class="uil uil-eye icon-view"></i></a></td>
                         </tr>
-                        <?php
-                            $i++
-                        ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                 </tbody>

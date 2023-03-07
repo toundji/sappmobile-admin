@@ -10,8 +10,8 @@ use Livewire\Component;
 
 class EditVehicule extends Component
 {
-    public $vehicule_id;
-    public $category_id;
+    public $id_vehicule;
+    public $id_category;
     public $matricule;
     public $model;
     public $marque;
@@ -23,9 +23,9 @@ class EditVehicule extends Component
     public $conducteurs;
 
     public function mount($id) {
-        $this->vehicule_id = $id;
+        $this->id_vehicule = $id;
         $vehicule = Vehicule::where('id', $id)->first();
-        $this->category_id = $vehicule->category_id;
+        $this->id_category = $vehicule->id_category;
         $this->matricule = $vehicule->matricule;
         $this->model = $vehicule->model;
         $this->marque = $vehicule->marque;
@@ -33,8 +33,7 @@ class EditVehicule extends Component
         $this->couleur = $vehicule->couleur;
         $this->max_passenger = $vehicule->max_passenger;
         $this->status = $vehicule->status;
-        $user = getUser(getConducteur($vehicule->conducteur_id)->user_id ?? 0);
-        $this->conducteur_phone = ($user !== null) ? $user->phone : "";
+        $this->conducteur_phone = $vehicule->conducteur->user->phone;
         $this->conducteurs = Conducteur::where('status', 1)->get();
     }
 
@@ -43,7 +42,7 @@ class EditVehicule extends Component
         $set = true;
         if(count($all) != 0) {
             if(count($all) === 1) {
-                if($all = Vehicule::where('matricule', $this->matricule)->where('id', $this->vehicule_id)->count() != 1) {
+                if($all = Vehicule::where('matricule', $this->matricule)->where('id', $this->id_vehicule)->count() != 1) {
                     $set = false;
                 }
             } else {
@@ -57,7 +56,7 @@ class EditVehicule extends Component
             if($userr != null) {
                 $conducteur = getConducteurByUser($userr->id);
                 if($conducteur != null) {
-                    $conducteur_id = $conducteur->id;
+                    $id_conducteur = $conducteur->id;
                 } else {
                     $r = true;
                 }
@@ -70,19 +69,19 @@ class EditVehicule extends Component
                 return;
             }
         } else {
-            $conducteur_id = null;
+            $id_conducteur = null;
         }
 
 
         if($set) {
 
-            if(Vehicule::where('id', $this->vehicule_id)->first()->conducteur_id != $conducteur_id) {
-                VehiculeConducteurHistory::where('vehicule_id', $this->vehicule_id)->where("dateEnd", null)->update(['dateEnd' => getDateLikeNow()]);
-                VehiculeConducteurHistory::create(['conducteur_id' => $conducteur_id, "vehicule_id" => $this->vehicule_id]);
+            if(Vehicule::where('id', $this->id_vehicule)->first()->id_conducteur != $id_conducteur) {
+                VehiculeConducteurHistory::where('id_vehicule', $this->id_vehicule)->where("dateEnd", null)->update(['dateEnd' => getDateLikeNow()]);
+                VehiculeConducteurHistory::create(['id_conducteur' => $id_conducteur, "id_vehicule" => $this->id_vehicule]);
             }
 
-            Vehicule::where('id', $this->vehicule_id)->update([
-                'category_id' => $this->category_id,
+            Vehicule::where('id', $this->id_vehicule)->update([
+                'id_category' => $this->id_category,
                 'matricule' => $this->matricule,
                 'model' => $this->model,
                 'max_passenger' => $this->max_passenger,
@@ -90,7 +89,7 @@ class EditVehicule extends Component
                 'pays_fabrication' => $this->pays_fabrication,
                 'couleur' => $this->couleur,
                 'status' => $this->status,
-                "conducteur_id" =>$conducteur_id
+                "id_conducteur" =>$id_conducteur
             ]);
 
             session()->flash("success", "Véhicule modifié ave succès.");

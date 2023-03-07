@@ -18,14 +18,11 @@
                   </tr>
                 </thead>
                 <tbody  class="border-white">
-                    <?php
-                        $i = 1;
-                    ?>
-                    <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i => $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr class="border-white">
-                            <td scope="row"><b class="text-primary-"><?php echo e($i); ?></b></td>
+                            <td scope="row"><b class="text-primary-"><?php echo e($i + 1); ?></b></td>
                             <td>
-                                <img src="$user->image_profil" class="rounded-circle user-image" alt="">
+                                <img src="<?php echo e($user->image_profil); ?>" class="rounded-circle user-image" alt="">
                                 <span class="ms-2"><a href="<?php echo e(route('admin.client', ['id' => $user->id])); ?>"><?php echo e(ucfirst($user->last_name).' '.ucfirst($user->first_name)); ?></a></span>
                             </td>
                             <td><?php echo e($user->created_at->format('d/m/Y')); ?></td>
@@ -33,9 +30,6 @@
                             <td><?php echo e($user->email); ?></td>
                             <td class="text-center"><a href="<?php echo e(route('admin.client', ['id' => $user->id])); ?>"><i class="uil uil-eye icon-view"></i></a></td>
                         </tr>
-                        <?php
-                            $i++
-                        ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                 </tbody>

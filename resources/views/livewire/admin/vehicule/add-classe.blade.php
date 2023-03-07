@@ -25,7 +25,7 @@
             </div>
             <div class="mb-4">
                 <label for="">Image d'une voiture de la catégorie</label>
-                <input type="file" min="1" accept=".png, .jpg, .jpeg" class="form-control-" required wire:model.defer="image_category">
+                <input type="file" min="1" accept=".png, .jpg, .jpeg" class="form-control" required wire:model.defer="image_category">
             </div>
             <div class="mb-4">
                 <label for="">Caractéristique (séparées par ;)</label>

@@ -18,14 +18,11 @@
                   </tr>
                 </thead>
                 <tbody  class="border-white">
-                    @php
-                        $i = 1;
-                    @endphp
-                    @foreach ($users as $user)
+                    @foreach ($users as $i => $user)
                         <tr class="border-white">
-                            <td scope="row"><b class="text-primary-">{{ $i }}</b></td>
+                            <td scope="row"><b class="text-primary-">{{ $i + 1 }}</b></td>
                             <td>
-                                <img src="$user->image_profil" class="rounded-circle user-image" alt="">
+                                <img src="{{ $user->image_profil }}" class="rounded-circle user-image" alt="">
                                 <span class="ms-2"><a href="{{ route('admin.client', ['id' => $user->id]) }}">{{ ucfirst($user->last_name).' '.ucfirst($user->first_name) }}</a></span>
                             </td>
                             <td>{{ $user->created_at->format('d/m/Y') }}</td>
@@ -33,9 +30,6 @@
                             <td>{{ $user->email }}</td>
                             <td class="text-center"><a href="{{ route('admin.client', ['id' => $user->id]) }}"><i class="uil uil-eye icon-view"></i></a></td>
                         </tr>
-                        @php
-                            $i++
-                        @endphp
                     @endforeach
 
                 </tbody>

@@ -9,17 +9,17 @@ class OperationController extends Controller
 {
 
     public function operations($type = "") {
-        $page = "operations";
+        $page = "admin.operation.operations";
         $title = "Liste des opérations";
-        return view("admin.alloperation", compact("page", "title", "type"));
+        return view("admin.all", compact("page", "title", "type"));
     }
 
     public function operation($id) {
         $operation = Transport::where('id', $id)->first();
         if($operation != null) {
-            $page = "operation";
+            $page = "admin.operation.operation";
             $title = "Opération ";
-            return view("admin.alloperation", compact("page", "title", "id"));
+            return view("admin.all", compact("page", "title", "id"));
         }
     }
 }
