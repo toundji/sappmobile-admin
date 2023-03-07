@@ -37,16 +37,14 @@ processes = []
   SESSION_DRIVER="file"
   SESSION_LIFETIME="120"
 
-
   MAIL_MAILER="smtp"
-  MAIL_HOST="smtp.mailtrap.io"
-  MAIL_PORT=2525
-  MAIL_USERNAME="4c4f648becf5a1"
-  MAIL_PASSWORD="2ba72054c953a3"
+  MAIL_HOST="mail.sapp-mobile.com"
+  MAIL_PORT=587
+  MAIL_USERNAME="contact@sapp-mobile.com"
+  MAIL_PASSWORD="contact@sapp-mobile.com"
   MAIL_ENCRYPTION="tls"
-  MAIL_FROM_ADDRESS="support@sapp-mobile.com"
   MAIL_FROM_NAME="${APP_NAME}"
-
+  MAIL_FROM_ADDRESS="contact@sapp-mobile.com"
 
 [experimental]
   auto_rollback = true
