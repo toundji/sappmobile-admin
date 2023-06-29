@@ -33,7 +33,7 @@ class EditVehicule extends Component
         $this->couleur = $vehicule->couleur;
         $this->max_passenger = $vehicule->max_passenger;
         $this->status = $vehicule->status;
-        $this->conducteur_phone = $vehicule->conducteur->user->phone;
+        $this->conducteur_phone = $vehicule->conducteur != null ? $vehicule->conducteur->user->phone : "";
         $this->conducteurs = Conducteur::where('status', 1)->get();
     }
 

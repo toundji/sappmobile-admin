@@ -15,10 +15,16 @@
                   <img src="{{ $user->image_profil }}" alt="avatar" class="rounded-circle img-fluid" style="width: 100px; height: 100px; object-fit: cover">
                   <h5 class="my-3">{{ ucfirst($user->last_name).' '.ucfirst($user->first_name) }}</h5>
                   <p class="text-muted mb-4">{{ $user->phone }}</p>
-                  {{-- <div class="d-flex justify-content-center mb-2">
-                    <button type="button" class="btn btn-primary">Follow</button>
-                    <button type="button" class="btn btn-outline-primary ms-1">Message</button>
-                  </div> --}}
+                  
+                  <div class="d-flex justify-content-center mb-2">
+                    @if ($user->status == "ACTIF")
+                        <button type="button" class="btn btn-outline-danger" wire:loading.remove wire:target="set_status" wire:click="set_status('DESACTIVE')">Désactiver</button>
+                    @else
+                        <button type="button" class="btn btn-outline-success" wire:loading.remove wire:target="set_status" wire:click="set_status('ACTIF')">Activer</button>
+                    @endif
+                    <button wire:loading wire:target="set_status" disabled class="btn w-100 btn-login">Mise à jour...</button>
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -57,13 +63,13 @@
                         <p class="mb-0 text-black">Status</p>
                         </div>
                         <div class="col-sm-9 text-end">
-                        <p class="text-muted mb-0">{{ $user->status }}</p>
+                        <p class="text-muted mb-0 text-black fw-bold">{{ $user->status }}</p>
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-sm-3">
-                        <p class="mb-0 text-black">portefeuille</p>
+                        <p class="mb-0 text-black">Portefeuille</p>
                         </div>
                         <div class="col-sm-9 text-end">
                         <p class="text-muted mb-0">{{ $user->portefeuille ? $user->portefeuille->solde : 0 }} FCFA</p>
@@ -170,11 +176,13 @@
                                 <td>{{ $transport->created_at->format('d/m/Y à H:i:s') }}</td>
                                 <td>
                                     <img src="{{ $transport->user->image_profil }}" class="rounded-circle client-image" alt="">
-                                    <span class="ms-2"><a href="{{ route('admin.client', ['id' => $transport->user->id]) }}">{{ ucfirst($transport->user->last_name).' '.ucfirst($transport->user->first_name) }}</a></span>
+                                        <span class="ms-2"><a href="{{ route('admin.client', ['id' => $transport->user->id]) }}">{{ ucfirst($transport->user->last_name).' '.ucfirst($transport->user->first_name) }}</a></span>
                                 </td>
                                 <td>
-                                    <img src="{{ $transport->conducteur->user->image_profil }}" class="rounded-circle client-image" alt="">
-                                    <span class="ms-2"><a href="{{ route('admin.conducteur', ['id' => $transport->conducteur->id]) }}">{{ ucfirst($transport->conducteur->user->last_name).' '.ucfirst($transport->conducteur->user->first_name) }}</a></span>
+                                    @if ($transport->conducteur)
+                                        <img src="{{ $transport->conducteur->user->image_profil }}" class="rounded-circle client-image" alt="">
+                                        <span class="ms-2"><a href="{{ route('admin.conducteur', ['id' => $transport->conducteur->id]) }}">{{ ucfirst($transport->conducteur->user->last_name).' '.ucfirst($transport->conducteur->user->first_name) }}</a></span>
+                                    @endif
                                 </td>
                                 <td>{{ $transport->price }} FCFA</td>
                                 <td>

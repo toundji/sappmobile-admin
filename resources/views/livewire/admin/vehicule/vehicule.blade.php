@@ -101,8 +101,8 @@
                     <div class="col-sm-5 text-secondary">
                         Etat
                     </div>
-                    <div class="col-sm-7 fw-bold text-black- text-end {{  ($vehicule->status === 1) ? "text-success" : "text-danger"; }}">
-                        {{  ($vehicule->status === 1) ? "" : "Non"; }} En etat
+                    <div class="col-sm-7 fw-bold text-black- text-end {{  ($vehicule->status === 1) ? "text-success" : "text-danger" }}">
+                        {{  ($vehicule->status === 1) ? "" : "Non" }} En etat
                     </div>
                 </div>
                 <hr>

@@ -55,8 +55,10 @@
                             <td scope="row"><b class="text-primary-">{{ $i+1 }}</b></td>
                             <td>{{ $transport->created_at->format('d/m/Y à H:i:s') }}</td>
                             <td>
-                                <img src="{{ $transport->conducteur->user->image_profil }}" class="rounded-circle client-image" alt="">
-                                <span class="ms-2"><a href="{{ route('admin.conducteur', ['id' => $transport->conducteur->user->id]) }}">{{ ucfirst($transport->conducteur->user->last_name).' '.ucfirst($transport->conducteur->user->first_name) }}</a></span>
+                                @if ($transport->conducteur)
+                                    <img src="{{ $transport->conducteur->user->image_profil }}" class="rounded-circle client-image" alt="">
+                                    <span class="ms-2"><a href="{{ route('admin.conducteur', ['id' => $transport->conducteur->user->id]) }}">{{ ucfirst($transport->conducteur->user->last_name).' '.ucfirst($transport->conducteur->user->first_name) }}</a></span>
+                                @endif
                             </td>
                             <td>{{ $transport->price }} FCFA</td>
                         </tr>

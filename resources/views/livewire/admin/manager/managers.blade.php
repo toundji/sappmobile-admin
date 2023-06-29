@@ -17,22 +17,19 @@
                   </tr>
                 </thead>
                 <tbody  class="border-white">
-                    @php
-                        $i = 1;
-                    @endphp
-                    @foreach ($managers as $manager)
+                    @foreach ($managers as $i => $manager)
                         <tr class="border-white">
-                            <td scope="row"><b class="text-primary-">{{ $i }}</b></td>
+                            <td scope="row"><b class="text-primary-">{{ $i + 1 }}</b></td>
                             <td>
                                 <a href="{{ route('admin.manager', ['id' => $manager->id]) }}">{{ ucfirst($manager->last_name).' '.ucfirst($manager->first_name) }}</a>
                             </td>
                             <td>{{ $manager->first_name }}</td>
                             <td>{{ $manager->email }}</td>
-                            <td class="text-center"><a href="{{ route('admin.manager', ['id' => $manager->id]) }}"><i class="uil uil-eye icon-view"></i></a></td>
+                            <td class="text-center hstack">
+                                <a href="{{ route('admin.manager', ['id' => $manager->id]) }}"><i class="uil uil-eye icon-view"></i></a>
+                                <button wire:click="delete_manager({{ $manager->id }})" class="ms-3 border-none bg-danger"><i class="uil uil-trash text-white"></i></button>
+                            </td>
                         </tr>
-                        @php
-                            $i++
-                        @endphp
                     @endforeach
 
                 </tbody>

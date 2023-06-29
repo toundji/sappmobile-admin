@@ -7,6 +7,11 @@ use Livewire\Component;
 
 class Managers extends Component
 {
+
+    public function delete_manager($manager_id) {
+        Gestionnaire::destroy($manager_id);
+    }
+
     public function render()
     {
         return view('livewire.admin.manager.managers', [

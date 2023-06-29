@@ -16,6 +16,15 @@
                   <h5 class="my-3"><?php echo e(ucfirst($user->last_name).' '.ucfirst($user->first_name)); ?></h5>
                   <p class="text-muted mb-4"><?php echo e($user->phone); ?></p>
                   
+                  <div class="d-flex justify-content-center mb-2">
+                    <?php if($user->status == "ACTIF"): ?>
+                        <button type="button" class="btn btn-outline-danger" wire:loading.remove wire:target="set_status" wire:click="set_status('DESACTIVE')">Désactiver</button>
+                    <?php else: ?>
+                        <button type="button" class="btn btn-outline-success" wire:loading.remove wire:target="set_status" wire:click="set_status('ACTIF')">Activer</button>
+                    <?php endif; ?>
+                    <button wire:loading wire:target="set_status" disabled class="btn w-100 btn-login">Mise à jour...</button>
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -54,13 +63,13 @@
                         <p class="mb-0 text-black">Status</p>
                         </div>
                         <div class="col-sm-9 text-end">
-                        <p class="text-muted mb-0"><?php echo e($user->status); ?></p>
+                        <p class="text-muted mb-0 text-black fw-bold"><?php echo e($user->status); ?></p>
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-sm-3">
-                        <p class="mb-0 text-black">portefeuille</p>
+                        <p class="mb-0 text-black">Portefeuille</p>
                         </div>
                         <div class="col-sm-9 text-end">
                         <p class="text-muted mb-0"><?php echo e($user->portefeuille ? $user->portefeuille->solde : 0); ?> FCFA</p>
@@ -167,11 +176,13 @@
                                 <td><?php echo e($transport->created_at->format('d/m/Y à H:i:s')); ?></td>
                                 <td>
                                     <img src="<?php echo e($transport->user->image_profil); ?>" class="rounded-circle client-image" alt="">
-                                    <span class="ms-2"><a href="<?php echo e(route('admin.client', ['id' => $transport->user->id])); ?>"><?php echo e(ucfirst($transport->user->last_name).' '.ucfirst($transport->user->first_name)); ?></a></span>
+                                        <span class="ms-2"><a href="<?php echo e(route('admin.client', ['id' => $transport->user->id])); ?>"><?php echo e(ucfirst($transport->user->last_name).' '.ucfirst($transport->user->first_name)); ?></a></span>
                                 </td>
                                 <td>
-                                    <img src="<?php echo e($transport->conducteur->user->image_profil); ?>" class="rounded-circle client-image" alt="">
-                                    <span class="ms-2"><a href="<?php echo e(route('admin.conducteur', ['id' => $transport->conducteur->id])); ?>"><?php echo e(ucfirst($transport->conducteur->user->last_name).' '.ucfirst($transport->conducteur->user->first_name)); ?></a></span>
+                                    <?php if($transport->conducteur): ?>
+                                        <img src="<?php echo e($transport->conducteur->user->image_profil); ?>" class="rounded-circle client-image" alt="">
+                                        <span class="ms-2"><a href="<?php echo e(route('admin.conducteur', ['id' => $transport->conducteur->id])); ?>"><?php echo e(ucfirst($transport->conducteur->user->last_name).' '.ucfirst($transport->conducteur->user->first_name)); ?></a></span>
+                                    <?php endif; ?>
                                 </td>
                                 <td><?php echo e($transport->price); ?> FCFA</td>
                                 <td>

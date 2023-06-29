@@ -15,14 +15,20 @@ class Client extends Component
 {
     use WithPagination;
 
+    public $user_id;
+
     public function mount($id) {
-        $this->id = $id;
+        $this->user_id = $id;
+    }
+    
+    public function set_status($status) {
+        User::where('id', $this->user_id)->update(['status' => $status]);
     }
 
     public function render()
     {
         return view('livewire.admin.client.client', [
-            'user' => User::where('id', $this->id)->first()
+            'user' => User::where('id', $this->user_id)->first()
         ]);
     }
 }

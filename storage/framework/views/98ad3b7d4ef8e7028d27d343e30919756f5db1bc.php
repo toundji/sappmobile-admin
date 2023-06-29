@@ -17,22 +17,19 @@
                   </tr>
                 </thead>
                 <tbody  class="border-white">
-                    <?php
-                        $i = 1;
-                    ?>
-                    <?php $__currentLoopData = $managers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $manager): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php $__currentLoopData = $managers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i => $manager): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr class="border-white">
-                            <td scope="row"><b class="text-primary-"><?php echo e($i); ?></b></td>
+                            <td scope="row"><b class="text-primary-"><?php echo e($i + 1); ?></b></td>
                             <td>
                                 <a href="<?php echo e(route('admin.manager', ['id' => $manager->id])); ?>"><?php echo e(ucfirst($manager->last_name).' '.ucfirst($manager->first_name)); ?></a>
                             </td>
                             <td><?php echo e($manager->first_name); ?></td>
                             <td><?php echo e($manager->email); ?></td>
-                            <td class="text-center"><a href="<?php echo e(route('admin.manager', ['id' => $manager->id])); ?>"><i class="uil uil-eye icon-view"></i></a></td>
+                            <td class="text-center hstack">
+                                <a href="<?php echo e(route('admin.manager', ['id' => $manager->id])); ?>"><i class="uil uil-eye icon-view"></i></a>
+                                <button onclick="confirm('ok')" wire:click="delete_manager(<?php echo e($manager->id); ?>)" class="ms-3"><i class="uil uil-trash text-danger"></i></button>
+                            </td>
                         </tr>
-                        <?php
-                            $i++
-                        ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                 </tbody>
