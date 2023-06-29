@@ -27,7 +27,7 @@
                             <td>{{ $manager->email }}</td>
                             <td class="text-center hstack">
                                 <a href="{{ route('admin.manager', ['id' => $manager->id]) }}"><i class="uil uil-eye icon-view"></i></a>
-                                <button wire:click="delete_manager({{ $manager->id }})" class="ms-3 border-none bg-danger"><i class="uil uil-trash text-white"></i></button>
+                                <button wire:click="delete_manager({{ $manager->id }})" class="ms-3 btn btn-sm btn-danger"><i class="uil uil-trash text-white"></i></button>
                             </td>
                         </tr>
                     @endforeach

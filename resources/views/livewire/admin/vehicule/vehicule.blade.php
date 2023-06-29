@@ -27,6 +27,26 @@
 
                 <div class="row mt-4">
                     <div class="col-sm-5 text-secondary">
+                        Date d'ajout
+                    </div>
+                    <div class="col-sm-7 fw-bold text-black- text-end">
+                        {{  $vehicule->created_at }}
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row mt-4">
+                    <div class="col-sm-5 text-secondary">
+                        Date Dernière modification
+                    </div>
+                    <div class="col-sm-7 fw-bold text-black- text-end">
+                        {{  $vehicule->updated_at }}
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row mt-4">
+                    <div class="col-sm-5 text-secondary">
                         Catégorie
                     </div>
                     <div class="col-sm-7 fw-bold text-black- text-end">

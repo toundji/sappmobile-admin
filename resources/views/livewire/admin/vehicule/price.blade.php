@@ -26,11 +26,12 @@
                             <td>{{ $category->name }} </td>
                             <td>{{ $category->metter_price }} FCFA</td>
                             <td>{{ $category->km_price }} FCFA</td>
-                            <td class="text-center">
+                            <td class="text-center hstack">
                                 <a href="{{ route('admin.edit_classe', ['id' => $category->id]) }}">
                                     <i class="uil uil-edit icon-view"></i>
                                 </a>
-                            <td>
+                                <button wire:click="delete_category({{ $category->id }})" class="ms-3 btn btn-sm btn-danger"><i class="uil uil-trash text-white"></i></button>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

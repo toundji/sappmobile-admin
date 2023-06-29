@@ -26,11 +26,12 @@
                             <td><?php echo e($category->name); ?> </td>
                             <td><?php echo e($category->metter_price); ?> FCFA</td>
                             <td><?php echo e($category->km_price); ?> FCFA</td>
-                            <td class="text-center">
+                            <td class="text-center hstack">
                                 <a href="<?php echo e(route('admin.edit_classe', ['id' => $category->id])); ?>">
                                     <i class="uil uil-edit icon-view"></i>
                                 </a>
-                            <td>
+                                <button wire:click="delete_category(<?php echo e($category->id); ?>)" class="ms-3 btn btn-sm btn-danger"><i class="uil uil-trash text-white"></i></button>
+                            </td>
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
